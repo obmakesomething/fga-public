@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fga.local/schemas/verification-identity-input-v1.schema.json",
+  "title": "FGA verification identity input v1 candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "contractId",
+    "contractVersion",
+    "contractSourceReceiptHash",
+    "contractContentHash",
+    "contractApprovalReceiptHash",
+    "applicabilityContextHash",
+    "semanticConfigurationHash",
+    "verificationRecipeHash",
+    "targetIdentityHash",
+    "environmentIdentityHash",
+    "routeStateSetHash",
+    "evidencePolicyHash",
+    "engineApiVersion",
+    "comparatorVersion",
+    "finalVerifierEligible",
+    "canClaimVerifiedFixed"
+  ],
+  "properties": {
+    "schema": { "const": "fga-verification-identity-input-v1" },
+    "contractId": { "type": "string", "minLength": 1 },
+    "contractVersion": { "type": "string", "minLength": 1 },
+    "contractSourceReceiptHash": { "$ref": "#/definitions/sha256" },
+    "contractContentHash": { "$ref": "#/definitions/sha256" },
+    "contractApprovalReceiptHash": { "$ref": "#/definitions/sha256" },
+    "applicabilityContextHash": { "$ref": "#/definitions/sha256" },
+    "semanticConfigurationHash": { "$ref": "#/definitions/sha256" },
+    "verificationRecipeHash": { "$ref": "#/definitions/sha256" },
+    "targetIdentityHash": { "$ref": "#/definitions/sha256" },
+    "environmentIdentityHash": { "$ref": "#/definitions/sha256" },
+    "routeStateSetHash": { "$ref": "#/definitions/sha256" },
+    "evidencePolicyHash": { "$ref": "#/definitions/sha256" },
+    "engineApiVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["major", "minor"],
+      "properties": {
+        "major": { "type": "integer", "minimum": 0 },
+        "minor": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "comparatorVersion": { "type": "string", "minLength": 1 },
+    "finalVerifierEligible": { "const": false },
+    "canClaimVerifiedFixed": { "const": false }
+  },
+  "definitions": {
+    "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+  }
+}

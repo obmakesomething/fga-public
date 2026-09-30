@@ -1,0 +1,3625 @@
+{
+  "schema": "fga-research-examples-v1",
+  "datasetKind": "SYNTHETIC",
+  "execution": "local in-memory evaluation; no browser, remote model, or customer action",
+  "sourceBehavior": "Six extracted modules plus isolated candidate fixes; results are bounded to these exact inputs.",
+  "summary": {
+    "E1": {
+      "observedEligible": true,
+      "modelEligible": false,
+      "unimplementedEligible": false,
+      "spoofedTriggerEligible": false
+    },
+    "E2": {
+      "missingTransition": "NOT_EVALUATED",
+      "passingTransition": "PASS",
+      "failingTransition": "FAIL",
+      "proposedTransition": "NOT_EVALUATED",
+      "missingDelta": "NOT_EVALUATED"
+    },
+    "E3": {
+      "targetMismatch": "TRANSITION_BINDING_MISMATCH",
+      "environmentMismatch": "ENVIRONMENT_IDENTITY_MISMATCH",
+      "missingReceipt": "NOT_EVALUATED"
+    },
+    "E4": {
+      "candidateGroundingClass": "APPROVED_CONTRACT",
+      "hardEligible": false,
+      "missingReceiptHardEligible": false
+    },
+    "E5": {
+      "completeDelivery": {
+        "decision": "BLOCK",
+        "activationStatus": "NOT_ACTIVATED",
+        "canClaimVerifiedFixed": false
+      },
+      "unknownIssuer": {
+        "decision": "NOT_EVALUATED",
+        "activationStatus": "NOT_ACTIVATED",
+        "canClaimVerifiedFixed": false
+      },
+      "scopeDrift": {
+        "decision": "REVIEW",
+        "activationStatus": "NOT_ACTIVATED",
+        "canClaimVerifiedFixed": false
+      },
+      "elevatedPolicy": {
+        "decision": "NOT_EVALUATED",
+        "activationStatus": "NOT_ACTIVATED",
+        "canClaimVerifiedFixed": false
+      }
+    }
+  },
+  "examples": {
+    "E1": {
+      "inputs": {
+        "observedRelation": {
+          "type": "contains",
+          "from": "#panel",
+          "to": "#panel-toggle",
+          "status": "OBSERVED",
+          "source": [
+            "dom"
+          ],
+          "confidence": 0.99
+        },
+        "modelRelation": {
+          "type": "contains",
+          "from": "#panel",
+          "to": "#panel-toggle",
+          "status": "MODEL_PROPOSED",
+          "source": [],
+          "confidence": 0.99
+        },
+        "unimplementedRelation": {
+          "type": "contains",
+          "from": "#panel",
+          "to": "#panel-toggle",
+          "status": "UNIMPLEMENTED",
+          "source": [],
+          "confidence": 0.99
+        },
+        "spoofedTrigger": {
+          "type": "triggersState",
+          "from": "#panel-toggle",
+          "to": "#panel-open",
+          "status": "OBSERVED",
+          "source": [
+            "dom"
+          ],
+          "confidence": 0.99
+        }
+      },
+      "outputs": {
+        "observedEligible": true,
+        "modelEligible": false,
+        "unimplementedEligible": false,
+        "filteredRelationTypes": [
+          {
+            "type": "contains",
+            "status": "OBSERVED"
+          }
+        ],
+        "spoofedTriggerEligible": false,
+        "decoratedTrigger": {
+          "type": "triggersState",
+          "from": "#panel-toggle",
+          "to": "#panel-open",
+          "weight": 0.99,
+          "category": "behavioral",
+          "status": "MODEL_PROPOSED",
+          "source": [],
+          "determinism": "heuristic",
+          "languageDependency": "none",
+          "extractorVersion": "1.0.0",
+          "limitations": [
+            "no interaction executed",
+            "no observed transition"
+          ],
+          "confidence": 0.99
+        },
+        "decoratedModelRelation": {
+          "type": "contains",
+          "from": "#panel",
+          "to": "#panel-toggle",
+          "status": "MODEL_PROPOSED",
+          "weight": 0.99,
+          "category": "structural",
+          "source": [],
+          "determinism": "heuristic",
+          "languageDependency": "none",
+          "extractorVersion": "1.0.0",
+          "limitations": [],
+          "confidence": 0.99
+        },
+        "decoratedUnimplementedRelation": {
+          "type": "contains",
+          "from": "#panel",
+          "to": "#panel-toggle",
+          "status": "UNIMPLEMENTED",
+          "weight": 0.99,
+          "category": "structural",
+          "source": [],
+          "determinism": "heuristic",
+          "languageDependency": "none",
+          "extractorVersion": "1.0.0",
+          "limitations": [],
+          "confidence": 0.99
+        }
+      },
+      "interpretation": "Declared MODEL_PROPOSED and UNIMPLEMENTED relationships are excluded even with confidence 0.99. The same candidate relation is eligible only with declared OBSERVED provenance.",
+      "limit": "The taxonomy and filter operate on supplied metadata; this example does not prove that DOM data was really observed. The isolated candidate fix preserves restrictive supplied status and rejects known model-only type spoofing, not all false provenance."
+    },
+    "E2": {
+      "inputs": {
+        "missingTransition": {
+          "contract": {
+            "schema": "fga-transition-contract-projection-v2",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "sourceResolution": {
+              "status": "RESOLVED_APPLICABLE",
+              "conflictStatus": "NONE",
+              "records": [
+                {
+                  "sourceId": "synthetic-condition-1",
+                  "sourceType": "SYNTHETIC_FIXTURE",
+                  "locator": "synthetic:condition-1",
+                  "revision": "1",
+                  "authorityStatus": "CONFIRMED",
+                  "approvalStatus": "APPROVED",
+                  "currencyStatus": "CURRENT"
+                }
+              ]
+            },
+            "expectedSideProvenance": {
+              "status": "CONFIRMED",
+              "observedEvidenceExcluded": true
+            },
+            "approval": {
+              "status": "APPROVED",
+              "approvedBy": "synthetic-fixture-author",
+              "approvedAt": "2026-01-01T00:00:00.000Z",
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+            },
+            "applicability": {
+              "status": "APPLICABLE",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "routeStateId": "synthetic::closed"
+            },
+            "binding": {
+              "status": "BOUND",
+              "routeStateId": "synthetic::closed",
+              "targetIdentity": "#panel-toggle",
+              "eventType": "click",
+              "relation": {
+                "relationId": "",
+                "peerIdentities": []
+              }
+            },
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true
+            },
+            "measurement": {
+              "requiredEvidenceClass": "OBSERVED_INTERACTION",
+              "requiredNavigationLineage": "PAGE",
+              "requiredLinkResolutionLineage": "NONE"
+            },
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "transition": null,
+          "navigationIdentity": {
+            "schema": "fga-page-navigation-identity-v1",
+            "lineageStatus": "OBSERVED",
+            "requestedUrl": "https://synthetic.invalid/panel",
+            "finalUrl": "https://synthetic.invalid/panel",
+            "documentBaseUrl": "https://synthetic.invalid/panel",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "passingTransition": {
+          "contract": {
+            "schema": "fga-transition-contract-projection-v2",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "sourceResolution": {
+              "status": "RESOLVED_APPLICABLE",
+              "conflictStatus": "NONE",
+              "records": [
+                {
+                  "sourceId": "synthetic-condition-1",
+                  "sourceType": "SYNTHETIC_FIXTURE",
+                  "locator": "synthetic:condition-1",
+                  "revision": "1",
+                  "authorityStatus": "CONFIRMED",
+                  "approvalStatus": "APPROVED",
+                  "currencyStatus": "CURRENT"
+                }
+              ]
+            },
+            "expectedSideProvenance": {
+              "status": "CONFIRMED",
+              "observedEvidenceExcluded": true
+            },
+            "approval": {
+              "status": "APPROVED",
+              "approvedBy": "synthetic-fixture-author",
+              "approvedAt": "2026-01-01T00:00:00.000Z",
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+            },
+            "applicability": {
+              "status": "APPLICABLE",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "routeStateId": "synthetic::closed"
+            },
+            "binding": {
+              "status": "BOUND",
+              "routeStateId": "synthetic::closed",
+              "targetIdentity": "#panel-toggle",
+              "eventType": "click",
+              "relation": {
+                "relationId": "",
+                "peerIdentities": []
+              }
+            },
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true
+            },
+            "measurement": {
+              "requiredEvidenceClass": "OBSERVED_INTERACTION",
+              "requiredNavigationLineage": "PAGE",
+              "requiredLinkResolutionLineage": "NONE"
+            },
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "transition": {
+            "schema": "fga-event-transition-v2",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "sourceRouteStateId": "synthetic::closed",
+            "action": {
+              "type": "click"
+            },
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            },
+            "lifecycle": {
+              "planned": {
+                "status": "COMPLETED"
+              },
+              "authorized": {
+                "status": "COMPLETED"
+              },
+              "attempted": {
+                "status": "COMPLETED"
+              },
+              "delivered": {
+                "status": "CONFIRMED"
+              },
+              "stabilized": {
+                "status": "COMPLETED"
+              },
+              "captured": {
+                "status": "COMPLETED"
+              }
+            },
+            "before": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "after": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "directTargetDelta": {
+              "key": "#panel-toggle",
+              "changed": true,
+              "changes": {
+                "aria-expanded": {
+                  "before": "false",
+                  "after": "true"
+                }
+              }
+            },
+            "eventOutcome": {
+              "eventAttempted": true,
+              "eventDelivered": true,
+              "stateStabilized": true,
+              "postStateCaptured": true,
+              "presentationTransitionObserved": true
+            },
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "navigationIdentity": {
+            "schema": "fga-page-navigation-identity-v1",
+            "lineageStatus": "OBSERVED",
+            "requestedUrl": "https://synthetic.invalid/panel",
+            "finalUrl": "https://synthetic.invalid/panel",
+            "documentBaseUrl": "https://synthetic.invalid/panel",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "failingTransition": {
+          "contract": {
+            "schema": "fga-transition-contract-projection-v2",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "sourceResolution": {
+              "status": "RESOLVED_APPLICABLE",
+              "conflictStatus": "NONE",
+              "records": [
+                {
+                  "sourceId": "synthetic-condition-1",
+                  "sourceType": "SYNTHETIC_FIXTURE",
+                  "locator": "synthetic:condition-1",
+                  "revision": "1",
+                  "authorityStatus": "CONFIRMED",
+                  "approvalStatus": "APPROVED",
+                  "currencyStatus": "CURRENT"
+                }
+              ]
+            },
+            "expectedSideProvenance": {
+              "status": "CONFIRMED",
+              "observedEvidenceExcluded": true
+            },
+            "approval": {
+              "status": "APPROVED",
+              "approvedBy": "synthetic-fixture-author",
+              "approvedAt": "2026-01-01T00:00:00.000Z",
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+            },
+            "applicability": {
+              "status": "APPLICABLE",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "routeStateId": "synthetic::closed"
+            },
+            "binding": {
+              "status": "BOUND",
+              "routeStateId": "synthetic::closed",
+              "targetIdentity": "#panel-toggle",
+              "eventType": "click",
+              "relation": {
+                "relationId": "",
+                "peerIdentities": []
+              }
+            },
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true
+            },
+            "measurement": {
+              "requiredEvidenceClass": "OBSERVED_INTERACTION",
+              "requiredNavigationLineage": "PAGE",
+              "requiredLinkResolutionLineage": "NONE"
+            },
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "transition": {
+            "schema": "fga-event-transition-v2",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "sourceRouteStateId": "synthetic::closed",
+            "action": {
+              "type": "click"
+            },
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            },
+            "lifecycle": {
+              "planned": {
+                "status": "COMPLETED"
+              },
+              "authorized": {
+                "status": "COMPLETED"
+              },
+              "attempted": {
+                "status": "COMPLETED"
+              },
+              "delivered": {
+                "status": "CONFIRMED"
+              },
+              "stabilized": {
+                "status": "COMPLETED"
+              },
+              "captured": {
+                "status": "COMPLETED"
+              }
+            },
+            "before": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "after": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "directTargetDelta": {
+              "key": "#panel-toggle",
+              "changed": false,
+              "changes": {}
+            },
+            "eventOutcome": {
+              "eventAttempted": true,
+              "eventDelivered": true,
+              "stateStabilized": true,
+              "postStateCaptured": true,
+              "presentationTransitionObserved": false
+            },
+            "observationHash": "4ac6ecc81b1750393bfd499377821a725f291f873956909570ca9ecaae3509db",
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "navigationIdentity": {
+            "schema": "fga-page-navigation-identity-v1",
+            "lineageStatus": "OBSERVED",
+            "requestedUrl": "https://synthetic.invalid/panel",
+            "finalUrl": "https://synthetic.invalid/panel",
+            "documentBaseUrl": "https://synthetic.invalid/panel",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "proposedTransition": {
+          "contract": {
+            "schema": "fga-transition-contract-projection-v2",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "sourceResolution": {
+              "status": "RESOLVED_APPLICABLE",
+              "conflictStatus": "NONE",
+              "records": [
+                {
+                  "sourceId": "synthetic-condition-1",
+                  "sourceType": "SYNTHETIC_FIXTURE",
+                  "locator": "synthetic:condition-1",
+                  "revision": "1",
+                  "authorityStatus": "CONFIRMED",
+                  "approvalStatus": "APPROVED",
+                  "currencyStatus": "CURRENT"
+                }
+              ]
+            },
+            "expectedSideProvenance": {
+              "status": "CONFIRMED",
+              "observedEvidenceExcluded": true
+            },
+            "approval": {
+              "status": "APPROVED",
+              "approvedBy": "synthetic-fixture-author",
+              "approvedAt": "2026-01-01T00:00:00.000Z",
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+            },
+            "applicability": {
+              "status": "APPLICABLE",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "routeStateId": "synthetic::closed"
+            },
+            "binding": {
+              "status": "BOUND",
+              "routeStateId": "synthetic::closed",
+              "targetIdentity": "#panel-toggle",
+              "eventType": "click",
+              "relation": {
+                "relationId": "",
+                "peerIdentities": []
+              }
+            },
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true
+            },
+            "measurement": {
+              "requiredEvidenceClass": "OBSERVED_INTERACTION",
+              "requiredNavigationLineage": "PAGE",
+              "requiredLinkResolutionLineage": "NONE"
+            },
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "transition": {
+            "schema": "fga-event-transition-v2",
+            "evidenceClass": "MODEL_PROPOSED",
+            "sourceRouteStateId": "synthetic::closed",
+            "action": {
+              "type": "click"
+            },
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            },
+            "lifecycle": {
+              "planned": {
+                "status": "COMPLETED"
+              },
+              "authorized": {
+                "status": "COMPLETED"
+              },
+              "attempted": {
+                "status": "COMPLETED"
+              },
+              "delivered": {
+                "status": "CONFIRMED"
+              },
+              "stabilized": {
+                "status": "COMPLETED"
+              },
+              "captured": {
+                "status": "COMPLETED"
+              }
+            },
+            "before": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "after": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "directTargetDelta": {
+              "key": "#panel-toggle",
+              "changed": true,
+              "changes": {
+                "aria-expanded": {
+                  "before": "false",
+                  "after": "true"
+                }
+              }
+            },
+            "eventOutcome": {
+              "eventAttempted": true,
+              "eventDelivered": true,
+              "stateStabilized": true,
+              "postStateCaptured": true,
+              "presentationTransitionObserved": true
+            },
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "navigationIdentity": {
+            "schema": "fga-page-navigation-identity-v1",
+            "lineageStatus": "OBSERVED",
+            "requestedUrl": "https://synthetic.invalid/panel",
+            "finalUrl": "https://synthetic.invalid/panel",
+            "documentBaseUrl": "https://synthetic.invalid/panel",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "missingDelta": {
+          "contract": {
+            "schema": "fga-transition-contract-projection-v2",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "sourceResolution": {
+              "status": "RESOLVED_APPLICABLE",
+              "conflictStatus": "NONE",
+              "records": [
+                {
+                  "sourceId": "synthetic-condition-1",
+                  "sourceType": "SYNTHETIC_FIXTURE",
+                  "locator": "synthetic:condition-1",
+                  "revision": "1",
+                  "authorityStatus": "CONFIRMED",
+                  "approvalStatus": "APPROVED",
+                  "currencyStatus": "CURRENT"
+                }
+              ]
+            },
+            "expectedSideProvenance": {
+              "status": "CONFIRMED",
+              "observedEvidenceExcluded": true
+            },
+            "approval": {
+              "status": "APPROVED",
+              "approvedBy": "synthetic-fixture-author",
+              "approvedAt": "2026-01-01T00:00:00.000Z",
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+            },
+            "applicability": {
+              "status": "APPLICABLE",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "routeStateId": "synthetic::closed"
+            },
+            "binding": {
+              "status": "BOUND",
+              "routeStateId": "synthetic::closed",
+              "targetIdentity": "#panel-toggle",
+              "eventType": "click",
+              "relation": {
+                "relationId": "",
+                "peerIdentities": []
+              }
+            },
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true
+            },
+            "measurement": {
+              "requiredEvidenceClass": "OBSERVED_INTERACTION",
+              "requiredNavigationLineage": "PAGE",
+              "requiredLinkResolutionLineage": "NONE"
+            },
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "transition": {
+            "schema": "fga-event-transition-v2",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "sourceRouteStateId": "synthetic::closed",
+            "action": {
+              "type": "click"
+            },
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            },
+            "lifecycle": {
+              "planned": {
+                "status": "COMPLETED"
+              },
+              "authorized": {
+                "status": "COMPLETED"
+              },
+              "attempted": {
+                "status": "COMPLETED"
+              },
+              "delivered": {
+                "status": "CONFIRMED"
+              },
+              "stabilized": {
+                "status": "COMPLETED"
+              },
+              "captured": {
+                "status": "COMPLETED"
+              }
+            },
+            "before": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "after": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "eventOutcome": {
+              "eventAttempted": true,
+              "eventDelivered": true,
+              "stateStabilized": true,
+              "postStateCaptured": true,
+              "presentationTransitionObserved": true
+            },
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "navigationIdentity": {
+            "schema": "fga-page-navigation-identity-v1",
+            "lineageStatus": "OBSERVED",
+            "requestedUrl": "https://synthetic.invalid/panel",
+            "finalUrl": "https://synthetic.invalid/panel",
+            "documentBaseUrl": "https://synthetic.invalid/panel",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        }
+      },
+      "outputs": {
+        "missingTransition": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "NOT_EVALUATED",
+          "reasonCode": "TRANSITION_MISSING",
+          "disposition": "",
+          "requiresDecisionRequest": false,
+          "hardFailureEligible": false,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "status": "AVAILABLE",
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0"
+          },
+          "observed": {
+            "status": "NOT_PROVIDED"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "",
+            "environmentFingerprint": "",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "APPROVED",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "UNOBSERVED",
+            "navigation": "OBSERVED",
+            "linkResolution": "UNOBSERVED",
+            "transition": "NOT_REACHED",
+            "comparison": "NOT_EVALUATED"
+          },
+          "assertionHash": "840916752d059de4690d67cb0ad20e6e8d969e0cf1b10bf25afa8bc72f14164f"
+        },
+        "passingTransition": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "PASS",
+          "reasonCode": "EXPECTED_OBSERVATION_MATCH",
+          "disposition": "",
+          "requiresDecisionRequest": false,
+          "hardFailureEligible": false,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "targetIdentity": "#panel-toggle"
+          },
+          "observed": {
+            "value": true,
+            "directTargetDelta": {
+              "key": "#panel-toggle",
+              "changed": true,
+              "changes": {
+                "aria-expanded": {
+                  "before": "false",
+                  "after": "true"
+                }
+              }
+            },
+            "destinationComparisonStatus": "NOT_REQUIRED"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "VALID",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "COMPARABLE",
+            "navigation": "OBSERVED",
+            "linkResolution": "NOT_REQUIRED",
+            "transition": "CAPTURED",
+            "comparison": "EVALUATED"
+          },
+          "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031"
+        },
+        "failingTransition": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "FAIL",
+          "reasonCode": "EXPECTED_OBSERVATION_CONTRADICTION",
+          "disposition": "",
+          "requiresDecisionRequest": false,
+          "hardFailureEligible": true,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "targetIdentity": "#panel-toggle"
+          },
+          "observed": {
+            "value": false,
+            "directTargetDelta": {
+              "key": "#panel-toggle",
+              "changed": false,
+              "changes": {}
+            },
+            "destinationComparisonStatus": "NOT_REQUIRED"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "4ac6ecc81b1750393bfd499377821a725f291f873956909570ca9ecaae3509db",
+            "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "VALID",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "COMPARABLE",
+            "navigation": "OBSERVED",
+            "linkResolution": "NOT_REQUIRED",
+            "transition": "CAPTURED",
+            "comparison": "EVALUATED"
+          },
+          "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3"
+        },
+        "proposedTransition": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "NOT_EVALUATED",
+          "reasonCode": "TRANSITION_EVIDENCE_INCOMPLETE",
+          "disposition": "",
+          "requiresDecisionRequest": false,
+          "hardFailureEligible": false,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "status": "AVAILABLE",
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0"
+          },
+          "observed": {
+            "status": "INSUFFICIENT_EVIDENCE",
+            "evidenceClass": "MODEL_PROPOSED",
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "APPROVED",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "OBSERVED",
+            "navigation": "OBSERVED",
+            "linkResolution": "UNOBSERVED",
+            "transition": "COMPLETED",
+            "comparison": "NOT_EVALUATED"
+          },
+          "assertionHash": "d7e70f6206bd167faa25458cbbfc3a43e042ebeb83de9c261bab22b38243e664"
+        },
+        "missingDelta": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "NOT_EVALUATED",
+          "reasonCode": "PREDICATE_OBSERVATION_MISSING_OR_INVALID",
+          "disposition": "",
+          "requiresDecisionRequest": false,
+          "hardFailureEligible": false,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "status": "AVAILABLE",
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0"
+          },
+          "observed": {
+            "status": "INSUFFICIENT_EVIDENCE",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "APPROVED",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "OBSERVED",
+            "navigation": "OBSERVED",
+            "linkResolution": "UNOBSERVED",
+            "transition": "COMPLETED",
+            "comparison": "NOT_EVALUATED"
+          },
+          "assertionHash": "56cedf572a1071e9e67698b2ebf138141b51aa93318c34c5c26e66a880e2103f"
+        }
+      },
+      "interpretation": "With a synthetic governed contract, no transition is NOT_EVALUATED. Supplied complete OBSERVED_INTERACTION objects produce local PASS or FAIL; model-proposed and missing predicate data do not complete the comparison.",
+      "limit": "These objects were assembled in memory. No browser event, page capture, approval, or real observation happened."
+    },
+    "E3": {
+      "inputs": {
+        "targetMismatch": {
+          "contract": {
+            "schema": "fga-transition-contract-projection-v2",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "sourceResolution": {
+              "status": "RESOLVED_APPLICABLE",
+              "conflictStatus": "NONE",
+              "records": [
+                {
+                  "sourceId": "synthetic-condition-1",
+                  "sourceType": "SYNTHETIC_FIXTURE",
+                  "locator": "synthetic:condition-1",
+                  "revision": "1",
+                  "authorityStatus": "CONFIRMED",
+                  "approvalStatus": "APPROVED",
+                  "currencyStatus": "CURRENT"
+                }
+              ]
+            },
+            "expectedSideProvenance": {
+              "status": "CONFIRMED",
+              "observedEvidenceExcluded": true
+            },
+            "approval": {
+              "status": "APPROVED",
+              "approvedBy": "synthetic-fixture-author",
+              "approvedAt": "2026-01-01T00:00:00.000Z",
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+            },
+            "applicability": {
+              "status": "APPLICABLE",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "routeStateId": "synthetic::closed"
+            },
+            "binding": {
+              "status": "BOUND",
+              "routeStateId": "synthetic::closed",
+              "targetIdentity": "#panel-toggle",
+              "eventType": "click",
+              "relation": {
+                "relationId": "",
+                "peerIdentities": []
+              }
+            },
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true
+            },
+            "measurement": {
+              "requiredEvidenceClass": "OBSERVED_INTERACTION",
+              "requiredNavigationLineage": "PAGE",
+              "requiredLinkResolutionLineage": "NONE"
+            },
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "transition": {
+            "schema": "fga-event-transition-v2",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "sourceRouteStateId": "synthetic::closed",
+            "action": {
+              "type": "click"
+            },
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            },
+            "lifecycle": {
+              "planned": {
+                "status": "COMPLETED"
+              },
+              "authorized": {
+                "status": "COMPLETED"
+              },
+              "attempted": {
+                "status": "COMPLETED"
+              },
+              "delivered": {
+                "status": "CONFIRMED"
+              },
+              "stabilized": {
+                "status": "COMPLETED"
+              },
+              "captured": {
+                "status": "COMPLETED"
+              }
+            },
+            "before": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "after": {
+              "targetIdentity": "#different-panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "directTargetDelta": {
+              "key": "#panel-toggle",
+              "changed": true,
+              "changes": {
+                "aria-expanded": {
+                  "before": "false",
+                  "after": "true"
+                }
+              }
+            },
+            "eventOutcome": {
+              "eventAttempted": true,
+              "eventDelivered": true,
+              "stateStabilized": true,
+              "postStateCaptured": true,
+              "presentationTransitionObserved": true
+            },
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "navigationIdentity": {
+            "schema": "fga-page-navigation-identity-v1",
+            "lineageStatus": "OBSERVED",
+            "requestedUrl": "https://synthetic.invalid/panel",
+            "finalUrl": "https://synthetic.invalid/panel",
+            "documentBaseUrl": "https://synthetic.invalid/panel",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "environmentMismatch": {
+          "contract": {
+            "schema": "fga-transition-contract-projection-v2",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "sourceResolution": {
+              "status": "RESOLVED_APPLICABLE",
+              "conflictStatus": "NONE",
+              "records": [
+                {
+                  "sourceId": "synthetic-condition-1",
+                  "sourceType": "SYNTHETIC_FIXTURE",
+                  "locator": "synthetic:condition-1",
+                  "revision": "1",
+                  "authorityStatus": "CONFIRMED",
+                  "approvalStatus": "APPROVED",
+                  "currencyStatus": "CURRENT"
+                }
+              ]
+            },
+            "expectedSideProvenance": {
+              "status": "CONFIRMED",
+              "observedEvidenceExcluded": true
+            },
+            "approval": {
+              "status": "APPROVED",
+              "approvedBy": "synthetic-fixture-author",
+              "approvedAt": "2026-01-01T00:00:00.000Z",
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+            },
+            "applicability": {
+              "status": "APPLICABLE",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "routeStateId": "synthetic::closed"
+            },
+            "binding": {
+              "status": "BOUND",
+              "routeStateId": "synthetic::closed",
+              "targetIdentity": "#panel-toggle",
+              "eventType": "click",
+              "relation": {
+                "relationId": "",
+                "peerIdentities": []
+              }
+            },
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true
+            },
+            "measurement": {
+              "requiredEvidenceClass": "OBSERVED_INTERACTION",
+              "requiredNavigationLineage": "PAGE",
+              "requiredLinkResolutionLineage": "NONE"
+            },
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "transition": {
+            "schema": "fga-event-transition-v2",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "sourceRouteStateId": "synthetic::closed",
+            "action": {
+              "type": "click"
+            },
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "environmentId": "synthetic-env",
+              "buildId": "synthetic-build",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            },
+            "lifecycle": {
+              "planned": {
+                "status": "COMPLETED"
+              },
+              "authorized": {
+                "status": "COMPLETED"
+              },
+              "attempted": {
+                "status": "COMPLETED"
+              },
+              "delivered": {
+                "status": "CONFIRMED"
+              },
+              "stabilized": {
+                "status": "COMPLETED"
+              },
+              "captured": {
+                "status": "COMPLETED"
+              }
+            },
+            "before": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+              }
+            },
+            "after": {
+              "targetIdentity": "#panel-toggle",
+              "targetMatchCount": 1,
+              "environmentIdentity": {
+                "status": "OBSERVED",
+                "fingerprint": "987919ea2ecaba49ffa37eea72baa87e47f22d22c540c76fde576c4051c9242f"
+              }
+            },
+            "directTargetDelta": {
+              "key": "#panel-toggle",
+              "changed": true,
+              "changes": {
+                "aria-expanded": {
+                  "before": "false",
+                  "after": "true"
+                }
+              }
+            },
+            "eventOutcome": {
+              "eventAttempted": true,
+              "eventDelivered": true,
+              "stateStabilized": true,
+              "postStateCaptured": true,
+              "presentationTransitionObserved": true
+            },
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "navigationIdentity": {
+            "schema": "fga-page-navigation-identity-v1",
+            "lineageStatus": "OBSERVED",
+            "requestedUrl": "https://synthetic.invalid/panel",
+            "finalUrl": "https://synthetic.invalid/panel",
+            "documentBaseUrl": "https://synthetic.invalid/panel",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "identityInput": {
+          "schema": "fga-verification-identity-input-v1",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+          "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+          "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+          "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+          "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+          "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+          "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d",
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "targetDriftInput": {
+          "schema": "fga-verification-identity-input-v1",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+          "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+          "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+          "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+          "targetIdentityHash": "b35146fc762f0bbd7d9b14763e167afa5391e9e8f3bce2771fb62d7672cc5481",
+          "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+          "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d",
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "environmentDriftInput": {
+          "schema": "fga-verification-identity-input-v1",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+          "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+          "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+          "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+          "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+          "environmentIdentityHash": "987919ea2ecaba49ffa37eea72baa87e47f22d22c540c76fde576c4051c9242f",
+          "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+          "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d",
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "expectedDriftInput": {
+          "schema": "fga-verification-identity-input-v1",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+          "contractContentHash": "fd90878bfff9790578bf1d3d60625eeb9f81cee969d8ee0f5483aef9ca0b7c08",
+          "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+          "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+          "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+          "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+          "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+          "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+          "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d",
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "missingReceiptInput": {
+          "schema": "fga-verification-identity-input-v1",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+          "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+          "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+          "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+          "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+          "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d",
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        }
+      },
+      "outputs": {
+        "targetMismatch": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "NOT_EVALUATED",
+          "reasonCode": "TRANSITION_BINDING_MISMATCH",
+          "disposition": "",
+          "requiresDecisionRequest": false,
+          "hardFailureEligible": false,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "status": "AVAILABLE",
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0"
+          },
+          "observed": {
+            "status": "INSUFFICIENT_EVIDENCE",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "APPROVED",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "OBSERVED",
+            "navigation": "OBSERVED",
+            "linkResolution": "UNOBSERVED",
+            "transition": "COMPLETED",
+            "comparison": "NOT_EVALUATED"
+          },
+          "assertionHash": "11217021ee4ad89b366869086a48bb858803f6f3dd06d131a5a3ac1cca8196b8"
+        },
+        "environmentMismatch": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "NOT_EVALUATED",
+          "reasonCode": "ENVIRONMENT_IDENTITY_MISMATCH",
+          "disposition": "",
+          "requiresDecisionRequest": false,
+          "hardFailureEligible": false,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "status": "AVAILABLE",
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0"
+          },
+          "observed": {
+            "status": "INSUFFICIENT_EVIDENCE",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "APPROVED",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "OBSERVED",
+            "navigation": "OBSERVED",
+            "linkResolution": "UNOBSERVED",
+            "transition": "COMPLETED",
+            "comparison": "NOT_EVALUATED"
+          },
+          "assertionHash": "9d5484fd23b73238d72b8afaa223f9049004f79120740e4ebd844ba66d43c0bf"
+        },
+        "identity": {
+          "schema": "fga-verification-identity-v1",
+          "ruleVersion": "verification-identity-v1",
+          "identityStatus": "BOUND",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "componentHashes": {
+            "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+            "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+            "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+            "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+            "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+            "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+            "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d"
+          },
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "contractAuthorityHash": "c00d457babefc651aa859d538a1af5c4952cabeda452c4e1fecf5ae684e860db",
+          "expectedSideHash": "850b1dcc540374600f4c4524d3126746cfad836f37a54f94c9790de6b892314f",
+          "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+          "verificationIdentityHash": "75cb6ac45de40afc2d0d92119b8b2b418c03e89f288d29440996731dec08403b",
+          "artifactHash": "fc17c871735eb61848471d79ac272222dcd30cb63d072bc260b464bdc5be50bb",
+          "violations": [],
+          "claimBoundary": "This artifact binds candidate identity inputs only. It does not verify source authority, approval, target authority, evidence, deployment, customer outcome, or fixed status.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        },
+        "targetDrift": {
+          "schema": "fga-verification-identity-v1",
+          "ruleVersion": "verification-identity-v1",
+          "identityStatus": "BOUND",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "componentHashes": {
+            "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+            "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+            "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+            "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+            "targetIdentityHash": "b35146fc762f0bbd7d9b14763e167afa5391e9e8f3bce2771fb62d7672cc5481",
+            "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+            "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d"
+          },
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "contractAuthorityHash": "c00d457babefc651aa859d538a1af5c4952cabeda452c4e1fecf5ae684e860db",
+          "expectedSideHash": "850b1dcc540374600f4c4524d3126746cfad836f37a54f94c9790de6b892314f",
+          "comparisonScopeHash": "31e7a44f561d22db6a58e0200c21dc0bfe5965cf31c5ce3a7b949e7eecc4f8e0",
+          "verificationIdentityHash": "6f9cc4c9c3151c3bb14642cc73543c81e5381ac0f2e362d6c4308f2087f3a684",
+          "artifactHash": "4c29807eb40075b0b69f2fe2c023072185dc21f5dc16b248ce6d16763b186e15",
+          "violations": [],
+          "claimBoundary": "This artifact binds candidate identity inputs only. It does not verify source authority, approval, target authority, evidence, deployment, customer outcome, or fixed status.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        },
+        "environmentDrift": {
+          "schema": "fga-verification-identity-v1",
+          "ruleVersion": "verification-identity-v1",
+          "identityStatus": "BOUND",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "componentHashes": {
+            "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+            "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+            "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+            "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+            "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+            "environmentIdentityHash": "987919ea2ecaba49ffa37eea72baa87e47f22d22c540c76fde576c4051c9242f",
+            "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+            "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d"
+          },
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "contractAuthorityHash": "c00d457babefc651aa859d538a1af5c4952cabeda452c4e1fecf5ae684e860db",
+          "expectedSideHash": "850b1dcc540374600f4c4524d3126746cfad836f37a54f94c9790de6b892314f",
+          "comparisonScopeHash": "fa792da1027b15a6c95fa1ae7dde4cae2a1b7023dc8b40acf9ff437c6e6628b6",
+          "verificationIdentityHash": "d839b3c21941a1bc3c2dc33c418ec5c71898fe611143df002e520b62129f4b7a",
+          "artifactHash": "ce47c99732a30514a29fc9ae24c2ff399e6c499006ce61d18ef2f4f6198782c7",
+          "violations": [],
+          "claimBoundary": "This artifact binds candidate identity inputs only. It does not verify source authority, approval, target authority, evidence, deployment, customer outcome, or fixed status.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        },
+        "expectedDrift": {
+          "schema": "fga-verification-identity-v1",
+          "ruleVersion": "verification-identity-v1",
+          "identityStatus": "BOUND",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "componentHashes": {
+            "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+            "contractContentHash": "fd90878bfff9790578bf1d3d60625eeb9f81cee969d8ee0f5483aef9ca0b7c08",
+            "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+            "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+            "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+            "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+            "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+            "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+            "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d"
+          },
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "contractAuthorityHash": "db85830620d348420db5589654bc9ff4b63845618a0c59b77228adb6282d9dd1",
+          "expectedSideHash": "237c5f39d0b25550dacf490a7600312aac70fcdf193afc1f51ccf56d9e1d20a6",
+          "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+          "verificationIdentityHash": "46467777920c6bc83150347f9841d2bb63e2962ad324460ea12add64ec64c207",
+          "artifactHash": "c95b19add7b28ce8a4523ca1aab10416edd37da382211e03f69a5e9ee0c28fde",
+          "violations": [],
+          "claimBoundary": "This artifact binds candidate identity inputs only. It does not verify source authority, approval, target authority, evidence, deployment, customer outcome, or fixed status.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        },
+        "missingReceipt": {
+          "schema": "fga-verification-identity-v1",
+          "ruleVersion": "verification-identity-v1",
+          "identityStatus": "NOT_EVALUATED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "componentHashes": {
+            "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "contractApprovalReceiptHash": "",
+            "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+            "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+            "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+            "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+            "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+            "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d"
+          },
+          "engineApiVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "comparatorVersion": "synthetic-assertion-v2",
+          "contractAuthorityHash": "",
+          "expectedSideHash": "",
+          "comparisonScopeHash": "",
+          "verificationIdentityHash": "",
+          "artifactHash": "7c45749a207336bf6ff9accd1b1ac6c531ac6c4048d421e747643a504f663e7f",
+          "violations": [
+            "input.contractApprovalReceiptHash:INVALID"
+          ],
+          "claimBoundary": "This artifact binds candidate identity inputs only. It does not verify source authority, approval, target authority, evidence, deployment, customer outcome, or fixed status.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        }
+      },
+      "interpretation": "Before/after target and environment mismatches stop the assertion comparison. Real identity component fields change the bound scope or expected hashes; a missing receipt hash produces NOT_EVALUATED identity.",
+      "limit": "Identity hashes bind supplied bytes only; they do not compare actual deployments or independently validate receipt authority."
+    },
+    "E4": {
+      "inputs": {
+        "selfDeclaredFinding": {
+          "axis": "syntheticInteraction",
+          "ruleId": "panel-change",
+          "routeStateId": "synthetic::closed",
+          "verdict": "FAIL",
+          "grounding": {
+            "schema": "fga-finding-grounding-v1",
+            "kind": "APPROVED_PRODUCT_CONTRACT",
+            "identity": {
+              "id": "synthetic.panel-toggle",
+              "version": "1.0.0"
+            },
+            "resolutionStatus": "RESOLVED",
+            "authorityStatus": "ADMITTED",
+            "admissionStatus": "ADMITTED",
+            "applicability": {
+              "status": "APPLICABLE",
+              "scope": {
+                "axis": "syntheticInteraction",
+                "ruleId": "panel-change",
+                "routeStateId": "synthetic::closed"
+              },
+              "scopeHash": "451a43c8ce28cc226278625f44651dec53271bfda5bff18ac247da87e948e54b",
+              "decisionReceiptHash": "a000f3ae3136c4baeb696d58b499673226bf23c4375da57f8951cd6ea8f35b68"
+            },
+            "lifecycleStatus": "CURRENT",
+            "contentHash": "74575d9de2dddd75a8c9f5cac6e64239500a61193a27fdd9e1a681eda40f0a90",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "receipt": {
+              "schema": "fga-finding-grounding-receipt-v1",
+              "status": "VALID",
+              "groundingHash": "2e0ab4b825c00b014eeedace16d2eaa0d8ae75eff57d13fa7048f3328c36a744",
+              "authorityReceiptHash": "3ade3ab1a962da1878e2cfe7356be82e397eea67e5cf006d321f7ae424262ea0",
+              "admissionReceiptHash": "6ffdfe7ebe3a2c6cea00e42ae9b793cc77390149416a2b3284f734b58b255585",
+              "finalVerifierEligible": false,
+              "canClaimVerifiedFixed": false,
+              "receiptHash": "753363c9ea052ce497ee50212d5d2240a818c3e61e704419768be7fcaa57503c"
+            }
+          }
+        },
+        "missingFindingReceipt": {
+          "axis": "syntheticInteraction",
+          "ruleId": "panel-change",
+          "routeStateId": "synthetic::closed",
+          "verdict": "FAIL",
+          "grounding": {
+            "schema": "fga-finding-grounding-v1",
+            "kind": "APPROVED_PRODUCT_CONTRACT",
+            "identity": {
+              "id": "synthetic.panel-toggle",
+              "version": "1.0.0"
+            },
+            "resolutionStatus": "RESOLVED",
+            "authorityStatus": "ADMITTED",
+            "admissionStatus": "ADMITTED",
+            "applicability": {
+              "status": "APPLICABLE",
+              "scope": {
+                "axis": "syntheticInteraction",
+                "ruleId": "panel-change",
+                "routeStateId": "synthetic::closed"
+              },
+              "scopeHash": "451a43c8ce28cc226278625f44651dec53271bfda5bff18ac247da87e948e54b",
+              "decisionReceiptHash": "a000f3ae3136c4baeb696d58b499673226bf23c4375da57f8951cd6ea8f35b68"
+            },
+            "lifecycleStatus": "CURRENT",
+            "contentHash": "74575d9de2dddd75a8c9f5cac6e64239500a61193a27fdd9e1a681eda40f0a90",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "unresolvedContract": {
+          "schema": "fga-transition-contract-projection-v2",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "sourceResolution": {
+            "status": "RESOLVED_APPLICABLE",
+            "conflictStatus": "NONE",
+            "records": [
+              {
+                "sourceId": "synthetic-condition-1",
+                "sourceType": "SYNTHETIC_FIXTURE",
+                "locator": "synthetic:condition-1",
+                "revision": "1",
+                "authorityStatus": "UNCONFIRMED",
+                "approvalStatus": "APPROVED",
+                "currencyStatus": "CURRENT"
+              }
+            ]
+          },
+          "expectedSideProvenance": {
+            "status": "CONFIRMED",
+            "observedEvidenceExcluded": true
+          },
+          "approval": {
+            "status": "APPROVED",
+            "approvedBy": "synthetic-fixture-author",
+            "approvedAt": "2026-01-01T00:00:00.000Z",
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+          },
+          "applicability": {
+            "status": "APPLICABLE",
+            "environmentId": "synthetic-env",
+            "buildId": "synthetic-build",
+            "routeStateId": "synthetic::closed"
+          },
+          "binding": {
+            "status": "BOUND",
+            "routeStateId": "synthetic::closed",
+            "targetIdentity": "#panel-toggle",
+            "eventType": "click",
+            "relation": {
+              "relationId": "",
+              "peerIdentities": []
+            }
+          },
+          "expected": {
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true
+          },
+          "measurement": {
+            "requiredEvidenceClass": "OBSERVED_INTERACTION",
+            "requiredNavigationLineage": "PAGE",
+            "requiredLinkResolutionLineage": "NONE"
+          },
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        }
+      },
+      "outputs": {
+        "selfDeclaredFinding": {
+          "groundingClass": "UNAPPROVED_RULE",
+          "candidateGroundingClass": "APPROVED_CONTRACT",
+          "hardEligible": false,
+          "reason": "GROUNDING_AUTHORITY_NOT_VERIFIED",
+          "issues": []
+        },
+        "missingFindingReceipt": {
+          "groundingClass": "UNAPPROVED_RULE",
+          "candidateGroundingClass": "",
+          "hardEligible": false,
+          "reason": "GROUNDING_INVALID_OR_MISSING",
+          "issues": [
+            "grounding.receipt.admissionReceiptHash:INVALID",
+            "grounding.receipt.authorityReceiptHash:INVALID",
+            "grounding.receipt.canClaimVerifiedFixed:INVALID",
+            "grounding.receipt.finalVerifierEligible:INVALID",
+            "grounding.receipt.groundingHash:INVALID",
+            "grounding.receipt.receiptHash:INVALID",
+            "grounding.receipt.schema:INVALID",
+            "grounding.receipt.status:INVALID",
+            "grounding.receipt:NOT_A_PLAIN_OBJECT"
+          ]
+        },
+        "unresolvedContract": {
+          "schema": "fga-assertion-result-v2",
+          "verdict": "UNKNOWN",
+          "reasonCode": "CONTRACT_SOURCE_UNRESOLVED",
+          "disposition": "",
+          "requiresDecisionRequest": true,
+          "hardFailureEligible": false,
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false,
+          "blockDecision": "NOT_ISSUED",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "expected": {
+            "status": "AVAILABLE",
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true,
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0"
+          },
+          "observed": {
+            "status": "INSUFFICIENT_EVIDENCE",
+            "evidenceClass": "OBSERVED_INTERACTION",
+            "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+          },
+          "lineage": {
+            "contractSourceRecordIds": [
+              "synthetic-condition-1"
+            ],
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "relationId": "",
+            "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+            "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+            "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+            "linkResolutionEvidenceId": ""
+          },
+          "coverage": {
+            "contractSource": "RESOLVED_APPLICABLE",
+            "approval": "APPROVED",
+            "applicability": "APPLICABLE",
+            "binding": "BOUND",
+            "environment": "OBSERVED",
+            "navigation": "OBSERVED",
+            "linkResolution": "UNOBSERVED",
+            "transition": "COMPLETED",
+            "comparison": "NOT_EVALUATED"
+          },
+          "assertionHash": "cd72f17bb75d1d9fa737e248dab38fa13d7535fde8bfde006f2b9e178a36f4aa"
+        }
+      },
+      "interpretation": "A self-consistent producer-authored grounding receipt remains a candidate with hardEligible false. Missing receipt is invalid; unresolved source authority stays UNKNOWN.",
+      "limit": "The evaluator has no independent authoritative receipt readback. Synthetic APPROVED or ADMITTED strings are fixture claims, not real approval."
+    },
+    "E5": {
+      "inputs": {
+        "completeDeliveryInput": {
+          "baseAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "PASS",
+            "reasonCode": "EXPECTED_OBSERVATION_MATCH",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": false,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": true,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": true,
+                "changes": {
+                  "aria-expanded": {
+                    "before": "false",
+                    "after": "true"
+                  }
+                }
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031"
+          },
+          "headAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "FAIL",
+            "reasonCode": "EXPECTED_OBSERVATION_CONTRADICTION",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": true,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": false,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": false,
+                "changes": {}
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "4ac6ecc81b1750393bfd499377821a725f291f873956909570ca9ecaae3509db",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3"
+          },
+          "baseCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "ADMITTED",
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "certifiedVerdict": "PASS",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+            "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "headCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "ADMITTED",
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "certifiedVerdict": "FAIL",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "certificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "verificationReceiptHash": "9ef8a4ff6c30d50653242865d0e92e806953177fbd0a7e9768f93b7ba31d85d8",
+            "issuerAdmissionReceiptHash": "1147d78c98f45ba1dd9fc5c1c53bec44248972097702bd7ec910603cc1962965",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "disputeDecision": {
+            "schema": "fga-dispute-applicability-decision-v1",
+            "status": "NO_APPLICABLE_DISPUTE",
+            "authorityStatus": "ADMITTED",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "blockingPolicyDecision": {
+            "schema": "fga-blocking-policy-decision-v1",
+            "status": "AUTHORIZED",
+            "authorityStatus": "ADMITTED",
+            "policyId": "synthetic.blocking-policy",
+            "policyVersion": "1.0.0",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "policyContentHash": "8ed58d8c633ad33cf01bced9da98c6d21bf202075094876f3d34887568c2fa7a",
+            "decisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c",
+            "authorityReceiptHash": "4fbccf2750224fe144b332784010e04032fef8e0825a99e44572405f26e07e83",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "unknownIssuerInput": {
+          "baseAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "PASS",
+            "reasonCode": "EXPECTED_OBSERVATION_MATCH",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": false,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": true,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": true,
+                "changes": {
+                  "aria-expanded": {
+                    "before": "false",
+                    "after": "true"
+                  }
+                }
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031"
+          },
+          "headAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "FAIL",
+            "reasonCode": "EXPECTED_OBSERVATION_CONTRADICTION",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": true,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": false,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": false,
+                "changes": {}
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "4ac6ecc81b1750393bfd499377821a725f291f873956909570ca9ecaae3509db",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3"
+          },
+          "baseCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "ADMITTED",
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "certifiedVerdict": "PASS",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+            "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "headCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "UNKNOWN",
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "certifiedVerdict": "FAIL",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "certificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "verificationReceiptHash": "9ef8a4ff6c30d50653242865d0e92e806953177fbd0a7e9768f93b7ba31d85d8",
+            "issuerAdmissionReceiptHash": "1147d78c98f45ba1dd9fc5c1c53bec44248972097702bd7ec910603cc1962965",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "disputeDecision": {
+            "schema": "fga-dispute-applicability-decision-v1",
+            "status": "NO_APPLICABLE_DISPUTE",
+            "authorityStatus": "ADMITTED",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "blockingPolicyDecision": {
+            "schema": "fga-blocking-policy-decision-v1",
+            "status": "AUTHORIZED",
+            "authorityStatus": "ADMITTED",
+            "policyId": "synthetic.blocking-policy",
+            "policyVersion": "1.0.0",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "policyContentHash": "8ed58d8c633ad33cf01bced9da98c6d21bf202075094876f3d34887568c2fa7a",
+            "decisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c",
+            "authorityReceiptHash": "4fbccf2750224fe144b332784010e04032fef8e0825a99e44572405f26e07e83",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "scopeDriftInput": {
+          "baseAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "PASS",
+            "reasonCode": "EXPECTED_OBSERVATION_MATCH",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": false,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": true,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": true,
+                "changes": {
+                  "aria-expanded": {
+                    "before": "false",
+                    "after": "true"
+                  }
+                }
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031"
+          },
+          "headAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "FAIL",
+            "reasonCode": "EXPECTED_OBSERVATION_CONTRADICTION",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": true,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": false,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": false,
+                "changes": {}
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "4ac6ecc81b1750393bfd499377821a725f291f873956909570ca9ecaae3509db",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3"
+          },
+          "baseCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "ADMITTED",
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "certifiedVerdict": "PASS",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "32f8d46448acd00664b03befa911507b6dece5b837638457ed16dbc9c2ebf9da",
+            "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+            "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "headCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "ADMITTED",
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "certifiedVerdict": "FAIL",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "certificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "verificationReceiptHash": "9ef8a4ff6c30d50653242865d0e92e806953177fbd0a7e9768f93b7ba31d85d8",
+            "issuerAdmissionReceiptHash": "1147d78c98f45ba1dd9fc5c1c53bec44248972097702bd7ec910603cc1962965",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "disputeDecision": {
+            "schema": "fga-dispute-applicability-decision-v1",
+            "status": "NO_APPLICABLE_DISPUTE",
+            "authorityStatus": "ADMITTED",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "blockingPolicyDecision": {
+            "schema": "fga-blocking-policy-decision-v1",
+            "status": "AUTHORIZED",
+            "authorityStatus": "ADMITTED",
+            "policyId": "synthetic.blocking-policy",
+            "policyVersion": "1.0.0",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "policyContentHash": "8ed58d8c633ad33cf01bced9da98c6d21bf202075094876f3d34887568c2fa7a",
+            "decisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c",
+            "authorityReceiptHash": "4fbccf2750224fe144b332784010e04032fef8e0825a99e44572405f26e07e83",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          }
+        },
+        "elevatedPolicyInput": {
+          "baseAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "PASS",
+            "reasonCode": "EXPECTED_OBSERVATION_MATCH",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": false,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": true,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": true,
+                "changes": {
+                  "aria-expanded": {
+                    "before": "false",
+                    "after": "true"
+                  }
+                }
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031"
+          },
+          "headAssertion": {
+            "schema": "fga-assertion-result-v2",
+            "verdict": "FAIL",
+            "reasonCode": "EXPECTED_OBSERVATION_CONTRADICTION",
+            "disposition": "",
+            "requiresDecisionRequest": false,
+            "hardFailureEligible": true,
+            "status": "INFERRED",
+            "requiresHumanConfirm": true,
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false,
+            "canClaimVerifiedOutcome": false,
+            "canClaimVerifiedValue": false,
+            "blockDecision": "NOT_ISSUED",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "expected": {
+              "predicate": "DIRECT_TARGET_CHANGED",
+              "value": true,
+              "targetIdentity": "#panel-toggle"
+            },
+            "observed": {
+              "value": false,
+              "directTargetDelta": {
+                "key": "#panel-toggle",
+                "changed": false,
+                "changes": {}
+              },
+              "destinationComparisonStatus": "NOT_REQUIRED"
+            },
+            "lineage": {
+              "contractSourceRecordIds": [
+                "synthetic-condition-1"
+              ],
+              "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+              "relationId": "",
+              "transitionObservationHash": "4ac6ecc81b1750393bfd499377821a725f291f873956909570ca9ecaae3509db",
+              "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+              "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+              "linkResolutionEvidenceId": ""
+            },
+            "coverage": {
+              "contractSource": "RESOLVED_APPLICABLE",
+              "approval": "VALID",
+              "applicability": "APPLICABLE",
+              "binding": "BOUND",
+              "environment": "COMPARABLE",
+              "navigation": "OBSERVED",
+              "linkResolution": "NOT_REQUIRED",
+              "transition": "CAPTURED",
+              "comparison": "EVALUATED"
+            },
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3"
+          },
+          "baseCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "ADMITTED",
+            "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "certifiedVerdict": "PASS",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+            "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "headCertification": {
+            "schema": "fga-assertion-certification-receipt-v1",
+            "verificationStatus": "VALID",
+            "issuerAdmissionStatus": "ADMITTED",
+            "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "certifiedVerdict": "FAIL",
+            "contractId": "synthetic.panel-toggle",
+            "contractVersion": "1.0.0",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "certificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "verificationReceiptHash": "9ef8a4ff6c30d50653242865d0e92e806953177fbd0a7e9768f93b7ba31d85d8",
+            "issuerAdmissionReceiptHash": "1147d78c98f45ba1dd9fc5c1c53bec44248972097702bd7ec910603cc1962965",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "disputeDecision": {
+            "schema": "fga-dispute-applicability-decision-v1",
+            "status": "NO_APPLICABLE_DISPUTE",
+            "authorityStatus": "ADMITTED",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f",
+            "finalVerifierEligible": false,
+            "canClaimVerifiedFixed": false
+          },
+          "blockingPolicyDecision": {
+            "schema": "fga-blocking-policy-decision-v1",
+            "status": "AUTHORIZED",
+            "authorityStatus": "ADMITTED",
+            "policyId": "synthetic.blocking-policy",
+            "policyVersion": "1.0.0",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "policyContentHash": "8ed58d8c633ad33cf01bced9da98c6d21bf202075094876f3d34887568c2fa7a",
+            "decisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c",
+            "authorityReceiptHash": "4fbccf2750224fe144b332784010e04032fef8e0825a99e44572405f26e07e83",
+            "finalVerifierEligible": true,
+            "canClaimVerifiedFixed": false
+          }
+        }
+      },
+      "outputs": {
+        "completeDelivery": {
+          "schema": "fga-delivery-decision-v1",
+          "ruleVersion": "delivery-decision-v1",
+          "decision": "BLOCK",
+          "gates": [
+            {
+              "gateId": "CERTIFIED_HEAD_FAIL",
+              "status": "SATISFIED",
+              "reasonCode": "CERTIFICATION_ADMITTED",
+              "evidence": {
+                "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+                "certificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+                "verificationReceiptHash": "9ef8a4ff6c30d50653242865d0e92e806953177fbd0a7e9768f93b7ba31d85d8",
+                "issuerAdmissionReceiptHash": "1147d78c98f45ba1dd9fc5c1c53bec44248972097702bd7ec910603cc1962965"
+              }
+            },
+            {
+              "gateId": "CERTIFIED_BASE_PASS",
+              "status": "SATISFIED",
+              "reasonCode": "CERTIFICATION_ADMITTED",
+              "evidence": {
+                "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+                "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+                "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+                "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b"
+              }
+            },
+            {
+              "gateId": "SAME_CONTRACT_CONTENT_HASH",
+              "status": "SATISFIED",
+              "reasonCode": "COMPARISON_HASH_MATCH",
+              "evidence": {
+                "field": "contractContentHash",
+                "hash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+              }
+            },
+            {
+              "gateId": "SAME_COMPARISON_SCOPE_HASH",
+              "status": "SATISFIED",
+              "reasonCode": "COMPARISON_HASH_MATCH",
+              "evidence": {
+                "field": "comparisonScopeHash",
+                "hash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4"
+              }
+            },
+            {
+              "gateId": "NO_APPLICABLE_DISPUTE",
+              "status": "SATISFIED",
+              "reasonCode": "NO_APPLICABLE_DISPUTE_ADMITTED",
+              "evidence": {
+                "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+                "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f"
+              }
+            },
+            {
+              "gateId": "BLOCKING_POLICY_AUTHORIZED",
+              "status": "SATISFIED",
+              "reasonCode": "BLOCKING_POLICY_ADMITTED",
+              "evidence": {
+                "policyId": "synthetic.blocking-policy",
+                "policyVersion": "1.0.0",
+                "policyContentHash": "8ed58d8c633ad33cf01bced9da98c6d21bf202075094876f3d34887568c2fa7a",
+                "decisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c",
+                "authorityReceiptHash": "4fbccf2750224fe144b332784010e04032fef8e0825a99e44572405f26e07e83"
+              }
+            }
+          ],
+          "reasonCodes": [],
+          "summary": {
+            "requiredGateCount": 6,
+            "satisfiedGateCount": 6,
+            "unsatisfiedGateCount": 0,
+            "unknownGateCount": 0
+          },
+          "lineage": {
+            "baseAssertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "headAssertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "baseCertificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "headCertificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "disputeDecisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "blockingPolicyDecisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c"
+          },
+          "decisionHash": "486a4df20dd66f0c5e739713e1286d9b72705c831a8e2e2816100950e5921aec",
+          "claimBoundary": "This candidate separates assertion truth from merge delivery policy. It issues no readiness, customer, business-outcome, deployment, or fixed-status claim.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        },
+        "unknownIssuer": {
+          "schema": "fga-delivery-decision-v1",
+          "ruleVersion": "delivery-decision-v1",
+          "decision": "NOT_EVALUATED",
+          "gates": [
+            {
+              "gateId": "CERTIFIED_HEAD_FAIL",
+              "status": "UNKNOWN",
+              "reasonCode": "CERTIFICATION_AUTHORITY_UNKNOWN",
+              "evidence": {}
+            },
+            {
+              "gateId": "CERTIFIED_BASE_PASS",
+              "status": "SATISFIED",
+              "reasonCode": "CERTIFICATION_ADMITTED",
+              "evidence": {
+                "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+                "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+                "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+                "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b"
+              }
+            },
+            {
+              "gateId": "SAME_CONTRACT_CONTENT_HASH",
+              "status": "UNKNOWN",
+              "reasonCode": "COMPARISON_AUTHORITY_NOT_ADMITTED",
+              "evidence": {}
+            },
+            {
+              "gateId": "SAME_COMPARISON_SCOPE_HASH",
+              "status": "UNKNOWN",
+              "reasonCode": "COMPARISON_AUTHORITY_NOT_ADMITTED",
+              "evidence": {}
+            },
+            {
+              "gateId": "NO_APPLICABLE_DISPUTE",
+              "status": "SATISFIED",
+              "reasonCode": "NO_APPLICABLE_DISPUTE_ADMITTED",
+              "evidence": {
+                "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+                "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f"
+              }
+            },
+            {
+              "gateId": "BLOCKING_POLICY_AUTHORIZED",
+              "status": "SATISFIED",
+              "reasonCode": "BLOCKING_POLICY_ADMITTED",
+              "evidence": {
+                "policyId": "synthetic.blocking-policy",
+                "policyVersion": "1.0.0",
+                "policyContentHash": "8ed58d8c633ad33cf01bced9da98c6d21bf202075094876f3d34887568c2fa7a",
+                "decisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c",
+                "authorityReceiptHash": "4fbccf2750224fe144b332784010e04032fef8e0825a99e44572405f26e07e83"
+              }
+            }
+          ],
+          "reasonCodes": [
+            "CERTIFICATION_AUTHORITY_UNKNOWN",
+            "COMPARISON_AUTHORITY_NOT_ADMITTED",
+            "COMPARISON_AUTHORITY_NOT_ADMITTED"
+          ],
+          "summary": {
+            "requiredGateCount": 6,
+            "satisfiedGateCount": 3,
+            "unsatisfiedGateCount": 0,
+            "unknownGateCount": 3
+          },
+          "lineage": {
+            "baseAssertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "headAssertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "baseCertificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "headCertificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "disputeDecisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "blockingPolicyDecisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c"
+          },
+          "decisionHash": "d456a2eec13dddfa1a597250689073599b24e73e6ead5c2c7467de7ddee8a201",
+          "claimBoundary": "This candidate separates assertion truth from merge delivery policy. It issues no readiness, customer, business-outcome, deployment, or fixed-status claim.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        },
+        "scopeDrift": {
+          "schema": "fga-delivery-decision-v1",
+          "ruleVersion": "delivery-decision-v1",
+          "decision": "REVIEW",
+          "gates": [
+            {
+              "gateId": "CERTIFIED_HEAD_FAIL",
+              "status": "SATISFIED",
+              "reasonCode": "CERTIFICATION_ADMITTED",
+              "evidence": {
+                "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+                "certificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+                "verificationReceiptHash": "9ef8a4ff6c30d50653242865d0e92e806953177fbd0a7e9768f93b7ba31d85d8",
+                "issuerAdmissionReceiptHash": "1147d78c98f45ba1dd9fc5c1c53bec44248972097702bd7ec910603cc1962965"
+              }
+            },
+            {
+              "gateId": "CERTIFIED_BASE_PASS",
+              "status": "SATISFIED",
+              "reasonCode": "CERTIFICATION_ADMITTED",
+              "evidence": {
+                "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+                "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+                "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+                "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b"
+              }
+            },
+            {
+              "gateId": "SAME_CONTRACT_CONTENT_HASH",
+              "status": "SATISFIED",
+              "reasonCode": "COMPARISON_HASH_MATCH",
+              "evidence": {
+                "field": "contractContentHash",
+                "hash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+              }
+            },
+            {
+              "gateId": "SAME_COMPARISON_SCOPE_HASH",
+              "status": "UNSATISFIED",
+              "reasonCode": "COMPARISON_HASH_MISMATCH",
+              "evidence": {
+                "field": "comparisonScopeHash",
+                "baseHash": "32f8d46448acd00664b03befa911507b6dece5b837638457ed16dbc9c2ebf9da",
+                "headHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4"
+              }
+            },
+            {
+              "gateId": "NO_APPLICABLE_DISPUTE",
+              "status": "SATISFIED",
+              "reasonCode": "NO_APPLICABLE_DISPUTE_ADMITTED",
+              "evidence": {
+                "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+                "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f"
+              }
+            },
+            {
+              "gateId": "BLOCKING_POLICY_AUTHORIZED",
+              "status": "SATISFIED",
+              "reasonCode": "BLOCKING_POLICY_ADMITTED",
+              "evidence": {
+                "policyId": "synthetic.blocking-policy",
+                "policyVersion": "1.0.0",
+                "policyContentHash": "8ed58d8c633ad33cf01bced9da98c6d21bf202075094876f3d34887568c2fa7a",
+                "decisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c",
+                "authorityReceiptHash": "4fbccf2750224fe144b332784010e04032fef8e0825a99e44572405f26e07e83"
+              }
+            }
+          ],
+          "reasonCodes": [
+            "COMPARISON_HASH_MISMATCH"
+          ],
+          "summary": {
+            "requiredGateCount": 6,
+            "satisfiedGateCount": 5,
+            "unsatisfiedGateCount": 1,
+            "unknownGateCount": 0
+          },
+          "lineage": {
+            "baseAssertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "headAssertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "baseCertificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "headCertificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "",
+            "disputeDecisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "blockingPolicyDecisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c"
+          },
+          "decisionHash": "627cfeb27c3ac2fad2c99df4cf57f02efdfc950efbbfdc6c3ebf056f29ce24e3",
+          "claimBoundary": "This candidate separates assertion truth from merge delivery policy. It issues no readiness, customer, business-outcome, deployment, or fixed-status claim.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        },
+        "elevatedPolicy": {
+          "schema": "fga-delivery-decision-v1",
+          "ruleVersion": "delivery-decision-v1",
+          "decision": "NOT_EVALUATED",
+          "gates": [
+            {
+              "gateId": "CERTIFIED_HEAD_FAIL",
+              "status": "SATISFIED",
+              "reasonCode": "CERTIFICATION_ADMITTED",
+              "evidence": {
+                "assertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+                "certificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+                "verificationReceiptHash": "9ef8a4ff6c30d50653242865d0e92e806953177fbd0a7e9768f93b7ba31d85d8",
+                "issuerAdmissionReceiptHash": "1147d78c98f45ba1dd9fc5c1c53bec44248972097702bd7ec910603cc1962965"
+              }
+            },
+            {
+              "gateId": "CERTIFIED_BASE_PASS",
+              "status": "SATISFIED",
+              "reasonCode": "CERTIFICATION_ADMITTED",
+              "evidence": {
+                "assertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+                "certificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+                "verificationReceiptHash": "eb03a777311ac658dc0d8d7fbc33bdea7c9e102504314163ccbd2b2d4a3624f5",
+                "issuerAdmissionReceiptHash": "9c8b3ac191bc38a06691e36dadcc5aa392997d007cf206150430d7b286c57e8b"
+              }
+            },
+            {
+              "gateId": "SAME_CONTRACT_CONTENT_HASH",
+              "status": "SATISFIED",
+              "reasonCode": "COMPARISON_HASH_MATCH",
+              "evidence": {
+                "field": "contractContentHash",
+                "hash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+              }
+            },
+            {
+              "gateId": "SAME_COMPARISON_SCOPE_HASH",
+              "status": "SATISFIED",
+              "reasonCode": "COMPARISON_HASH_MATCH",
+              "evidence": {
+                "field": "comparisonScopeHash",
+                "hash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4"
+              }
+            },
+            {
+              "gateId": "NO_APPLICABLE_DISPUTE",
+              "status": "SATISFIED",
+              "reasonCode": "NO_APPLICABLE_DISPUTE_ADMITTED",
+              "evidence": {
+                "decisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+                "authorityReceiptHash": "22a22e6862a9f0d933de32cec6aa392ba7ac9c7de819e16abe98a3d751d66f6f"
+              }
+            },
+            {
+              "gateId": "BLOCKING_POLICY_AUTHORIZED",
+              "status": "UNKNOWN",
+              "reasonCode": "BLOCKING_POLICY_DECISION_INVALID",
+              "evidence": {
+                "invalidFields": [
+                  "finalVerifierEligible"
+                ]
+              }
+            }
+          ],
+          "reasonCodes": [
+            "BLOCKING_POLICY_DECISION_INVALID"
+          ],
+          "summary": {
+            "requiredGateCount": 6,
+            "satisfiedGateCount": 5,
+            "unsatisfiedGateCount": 0,
+            "unknownGateCount": 1
+          },
+          "lineage": {
+            "baseAssertionHash": "5ea30960ab74476eae817c2e5db6039ebb7827da9e48526d0d2c195fe54be031",
+            "headAssertionHash": "de5d645a1631a16603d605aeabfcddec1bf747ad7dc6984592f06c3d1c06c0d3",
+            "baseCertificateHash": "6847328fa141c3cf400a48daba86f40b72fa758885c2dcdd1eb66ba29df2fbd1",
+            "headCertificateHash": "0352d033cac8b1967eefb147f800fbd773626962473bb62ca46aa179af255cc2",
+            "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+            "comparisonScopeHash": "6ba908ace27528b2f2420a8b0382d6d1eaf3508d981c32ae785426f888cc8fe4",
+            "disputeDecisionHash": "0280caa15e2b1fe6b05f7c1f319e07895ab91cb8c084521e47761b5df57fd72e",
+            "blockingPolicyDecisionHash": "a3aea85f108d18903d96f62906b1c1e05cc16f41fa680106e8aaaa14a31faa4c"
+          },
+          "decisionHash": "7f740599630b0d28c7b0bc6b7359383a91af1b4ea0217735e9e90e2e5c501115",
+          "claimBoundary": "This candidate separates assertion truth from merge delivery policy. It issues no readiness, customer, business-outcome, deployment, or fixed-status claim.",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "activationStatus": "NOT_ACTIVATED",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false,
+          "canClaimVerifiedOutcome": false,
+          "canClaimVerifiedValue": false
+        }
+      },
+      "interpretation": "The pure delivery function returns raw BLOCK for six supplied satisfied gates, REVIEW for scope drift, and NOT_EVALUATED for unknown issuer or elevated disabled field. All outputs remain NOT_ACTIVATED with disabled verified-claim fields.",
+      "limit": "The synthetic certificates, admission receipts, dispute decision, and policy decision were all producer-authored here. Raw BLOCK is a local function return, not an actual CI block, publication, issuance, or VERIFIED_FIXED claim."
+    }
+  },
+  "negativeControls": {
+    "inputs": {
+      "malformedContractInput": {
+        "contract": [],
+        "transition": {
+          "schema": "fga-event-transition-v2",
+          "evidenceClass": "OBSERVED_INTERACTION",
+          "sourceRouteStateId": "synthetic::closed",
+          "action": {
+            "type": "click"
+          },
+          "environmentIdentity": {
+            "status": "OBSERVED",
+            "environmentId": "synthetic-env",
+            "buildId": "synthetic-build",
+            "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+          },
+          "lifecycle": {
+            "planned": {
+              "status": "COMPLETED"
+            },
+            "authorized": {
+              "status": "COMPLETED"
+            },
+            "attempted": {
+              "status": "COMPLETED"
+            },
+            "delivered": {
+              "status": "CONFIRMED"
+            },
+            "stabilized": {
+              "status": "COMPLETED"
+            },
+            "captured": {
+              "status": "COMPLETED"
+            }
+          },
+          "before": {
+            "targetIdentity": "#panel-toggle",
+            "targetMatchCount": 1,
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            }
+          },
+          "after": {
+            "targetIdentity": "#panel-toggle",
+            "targetMatchCount": 1,
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            }
+          },
+          "directTargetDelta": {
+            "key": "#panel-toggle",
+            "changed": true,
+            "changes": {
+              "aria-expanded": {
+                "before": "false",
+                "after": "true"
+              }
+            }
+          },
+          "eventOutcome": {
+            "eventAttempted": true,
+            "eventDelivered": true,
+            "stateStabilized": true,
+            "postStateCaptured": true,
+            "presentationTransitionObserved": true
+          },
+          "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "navigationIdentity": {
+          "schema": "fga-page-navigation-identity-v1",
+          "lineageStatus": "OBSERVED",
+          "requestedUrl": "https://synthetic.invalid/panel",
+          "finalUrl": "https://synthetic.invalid/panel",
+          "documentBaseUrl": "https://synthetic.invalid/panel",
+          "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        }
+      },
+      "unsupportedSchemaInput": {
+        "contract": {
+          "schema": "unsupported-contract-schema",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "sourceResolution": {
+            "status": "RESOLVED_APPLICABLE",
+            "conflictStatus": "NONE",
+            "records": [
+              {
+                "sourceId": "synthetic-condition-1",
+                "sourceType": "SYNTHETIC_FIXTURE",
+                "locator": "synthetic:condition-1",
+                "revision": "1",
+                "authorityStatus": "CONFIRMED",
+                "approvalStatus": "APPROVED",
+                "currencyStatus": "CURRENT"
+              }
+            ]
+          },
+          "expectedSideProvenance": {
+            "status": "CONFIRMED",
+            "observedEvidenceExcluded": true
+          },
+          "approval": {
+            "status": "APPROVED",
+            "approvedBy": "synthetic-fixture-author",
+            "approvedAt": "2026-01-01T00:00:00.000Z",
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+          },
+          "applicability": {
+            "status": "APPLICABLE",
+            "environmentId": "synthetic-env",
+            "buildId": "synthetic-build",
+            "routeStateId": "synthetic::closed"
+          },
+          "binding": {
+            "status": "BOUND",
+            "routeStateId": "synthetic::closed",
+            "targetIdentity": "#panel-toggle",
+            "eventType": "click",
+            "relation": {
+              "relationId": "",
+              "peerIdentities": []
+            }
+          },
+          "expected": {
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true
+          },
+          "measurement": {
+            "requiredEvidenceClass": "OBSERVED_INTERACTION",
+            "requiredNavigationLineage": "PAGE",
+            "requiredLinkResolutionLineage": "NONE"
+          },
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "transition": {
+          "schema": "fga-event-transition-v2",
+          "evidenceClass": "OBSERVED_INTERACTION",
+          "sourceRouteStateId": "synthetic::closed",
+          "action": {
+            "type": "click"
+          },
+          "environmentIdentity": {
+            "status": "OBSERVED",
+            "environmentId": "synthetic-env",
+            "buildId": "synthetic-build",
+            "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+          },
+          "lifecycle": {
+            "planned": {
+              "status": "COMPLETED"
+            },
+            "authorized": {
+              "status": "COMPLETED"
+            },
+            "attempted": {
+              "status": "COMPLETED"
+            },
+            "delivered": {
+              "status": "CONFIRMED"
+            },
+            "stabilized": {
+              "status": "COMPLETED"
+            },
+            "captured": {
+              "status": "COMPLETED"
+            }
+          },
+          "before": {
+            "targetIdentity": "#panel-toggle",
+            "targetMatchCount": 1,
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            }
+          },
+          "after": {
+            "targetIdentity": "#panel-toggle",
+            "targetMatchCount": 1,
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            }
+          },
+          "directTargetDelta": {
+            "key": "#panel-toggle",
+            "changed": true,
+            "changes": {
+              "aria-expanded": {
+                "before": "false",
+                "after": "true"
+              }
+            }
+          },
+          "eventOutcome": {
+            "eventAttempted": true,
+            "eventDelivered": true,
+            "stateStabilized": true,
+            "postStateCaptured": true,
+            "presentationTransitionObserved": true
+          },
+          "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "navigationIdentity": {
+          "schema": "fga-page-navigation-identity-v1",
+          "lineageStatus": "OBSERVED",
+          "requestedUrl": "https://synthetic.invalid/panel",
+          "finalUrl": "https://synthetic.invalid/panel",
+          "documentBaseUrl": "https://synthetic.invalid/panel",
+          "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        }
+      },
+      "elevatedContractInput": {
+        "contract": {
+          "schema": "fga-transition-contract-projection-v2",
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0",
+          "sourceResolution": {
+            "status": "RESOLVED_APPLICABLE",
+            "conflictStatus": "NONE",
+            "records": [
+              {
+                "sourceId": "synthetic-condition-1",
+                "sourceType": "SYNTHETIC_FIXTURE",
+                "locator": "synthetic:condition-1",
+                "revision": "1",
+                "authorityStatus": "CONFIRMED",
+                "approvalStatus": "APPROVED",
+                "currencyStatus": "CURRENT"
+              }
+            ]
+          },
+          "expectedSideProvenance": {
+            "status": "CONFIRMED",
+            "observedEvidenceExcluded": true
+          },
+          "approval": {
+            "status": "APPROVED",
+            "approvedBy": "synthetic-fixture-author",
+            "approvedAt": "2026-01-01T00:00:00.000Z",
+            "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9"
+          },
+          "applicability": {
+            "status": "APPLICABLE",
+            "environmentId": "synthetic-env",
+            "buildId": "synthetic-build",
+            "routeStateId": "synthetic::closed"
+          },
+          "binding": {
+            "status": "BOUND",
+            "routeStateId": "synthetic::closed",
+            "targetIdentity": "#panel-toggle",
+            "eventType": "click",
+            "relation": {
+              "relationId": "",
+              "peerIdentities": []
+            }
+          },
+          "expected": {
+            "predicate": "DIRECT_TARGET_CHANGED",
+            "value": true
+          },
+          "measurement": {
+            "requiredEvidenceClass": "OBSERVED_INTERACTION",
+            "requiredNavigationLineage": "PAGE",
+            "requiredLinkResolutionLineage": "NONE"
+          },
+          "finalVerifierEligible": true,
+          "canClaimVerifiedFixed": false
+        },
+        "transition": {
+          "schema": "fga-event-transition-v2",
+          "evidenceClass": "OBSERVED_INTERACTION",
+          "sourceRouteStateId": "synthetic::closed",
+          "action": {
+            "type": "click"
+          },
+          "environmentIdentity": {
+            "status": "OBSERVED",
+            "environmentId": "synthetic-env",
+            "buildId": "synthetic-build",
+            "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+          },
+          "lifecycle": {
+            "planned": {
+              "status": "COMPLETED"
+            },
+            "authorized": {
+              "status": "COMPLETED"
+            },
+            "attempted": {
+              "status": "COMPLETED"
+            },
+            "delivered": {
+              "status": "CONFIRMED"
+            },
+            "stabilized": {
+              "status": "COMPLETED"
+            },
+            "captured": {
+              "status": "COMPLETED"
+            }
+          },
+          "before": {
+            "targetIdentity": "#panel-toggle",
+            "targetMatchCount": 1,
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            }
+          },
+          "after": {
+            "targetIdentity": "#panel-toggle",
+            "targetMatchCount": 1,
+            "environmentIdentity": {
+              "status": "OBSERVED",
+              "fingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890"
+            }
+          },
+          "directTargetDelta": {
+            "key": "#panel-toggle",
+            "changed": true,
+            "changes": {
+              "aria-expanded": {
+                "before": "false",
+                "after": "true"
+              }
+            }
+          },
+          "eventOutcome": {
+            "eventAttempted": true,
+            "eventDelivered": true,
+            "stateStabilized": true,
+            "postStateCaptured": true,
+            "presentationTransitionObserved": true
+          },
+          "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+          "status": "INFERRED",
+          "requiresHumanConfirm": true,
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        },
+        "navigationIdentity": {
+          "schema": "fga-page-navigation-identity-v1",
+          "lineageStatus": "OBSERVED",
+          "requestedUrl": "https://synthetic.invalid/panel",
+          "finalUrl": "https://synthetic.invalid/panel",
+          "documentBaseUrl": "https://synthetic.invalid/panel",
+          "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+          "finalVerifierEligible": false,
+          "canClaimVerifiedFixed": false
+        }
+      },
+      "elevatedIdentityInput": {
+        "schema": "fga-verification-identity-input-v1",
+        "contractId": "synthetic.panel-toggle",
+        "contractVersion": "1.0.0",
+        "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+        "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+        "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+        "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+        "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+        "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+        "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+        "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+        "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+        "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d",
+        "engineApiVersion": {
+          "major": 1,
+          "minor": 0
+        },
+        "comparatorVersion": "synthetic-assertion-v2",
+        "finalVerifierEligible": false,
+        "canClaimVerifiedFixed": true
+      }
+    },
+    "outputs": {
+      "malformedContract": {
+        "schema": "fga-assertion-result-v2",
+        "verdict": "UNKNOWN",
+        "reasonCode": "CONTRACT_INVALID",
+        "disposition": "",
+        "requiresDecisionRequest": true,
+        "hardFailureEligible": false,
+        "status": "INFERRED",
+        "requiresHumanConfirm": true,
+        "finalVerifierEligible": false,
+        "canClaimVerifiedFixed": false,
+        "canClaimVerifiedOutcome": false,
+        "canClaimVerifiedValue": false,
+        "blockDecision": "NOT_ISSUED",
+        "contractId": "",
+        "contractVersion": "",
+        "contractContentHash": "",
+        "expected": {
+          "status": "UNAVAILABLE"
+        },
+        "observed": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "evidenceClass": "OBSERVED_INTERACTION",
+          "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+        },
+        "lineage": {
+          "contractSourceRecordIds": [],
+          "approvedContentHash": "",
+          "relationId": "",
+          "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+          "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+          "linkResolutionEvidenceId": ""
+        },
+        "coverage": {
+          "contractSource": "MISSING",
+          "approval": "MISSING",
+          "applicability": "UNKNOWN",
+          "binding": "UNBOUND",
+          "environment": "OBSERVED",
+          "navigation": "OBSERVED",
+          "linkResolution": "UNOBSERVED",
+          "transition": "COMPLETED",
+          "comparison": "NOT_EVALUATED"
+        },
+        "assertionHash": "5b4989fceebcd9f572a42471444a1e710ab34518a023ff0a6ab120b08b8917fb"
+      },
+      "unsupportedSchema": {
+        "schema": "fga-assertion-result-v2",
+        "verdict": "UNKNOWN",
+        "reasonCode": "CONTRACT_INVALID",
+        "disposition": "",
+        "requiresDecisionRequest": true,
+        "hardFailureEligible": false,
+        "status": "INFERRED",
+        "requiresHumanConfirm": true,
+        "finalVerifierEligible": false,
+        "canClaimVerifiedFixed": false,
+        "canClaimVerifiedOutcome": false,
+        "canClaimVerifiedValue": false,
+        "blockDecision": "NOT_ISSUED",
+        "contractId": "synthetic.panel-toggle",
+        "contractVersion": "1.0.0",
+        "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+        "expected": {
+          "status": "AVAILABLE",
+          "predicate": "DIRECT_TARGET_CHANGED",
+          "value": true,
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0"
+        },
+        "observed": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "evidenceClass": "OBSERVED_INTERACTION",
+          "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+        },
+        "lineage": {
+          "contractSourceRecordIds": [
+            "synthetic-condition-1"
+          ],
+          "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "relationId": "",
+          "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+          "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+          "linkResolutionEvidenceId": ""
+        },
+        "coverage": {
+          "contractSource": "RESOLVED_APPLICABLE",
+          "approval": "APPROVED",
+          "applicability": "APPLICABLE",
+          "binding": "BOUND",
+          "environment": "OBSERVED",
+          "navigation": "OBSERVED",
+          "linkResolution": "UNOBSERVED",
+          "transition": "COMPLETED",
+          "comparison": "NOT_EVALUATED"
+        },
+        "assertionHash": "3927a574cad1d291c7218b1476b890e6383f59097f5bb117ce938946504ba21c"
+      },
+      "elevatedContract": {
+        "schema": "fga-assertion-result-v2",
+        "verdict": "UNKNOWN",
+        "reasonCode": "CONTRACT_INVALID",
+        "disposition": "",
+        "requiresDecisionRequest": true,
+        "hardFailureEligible": false,
+        "status": "INFERRED",
+        "requiresHumanConfirm": true,
+        "finalVerifierEligible": false,
+        "canClaimVerifiedFixed": false,
+        "canClaimVerifiedOutcome": false,
+        "canClaimVerifiedValue": false,
+        "blockDecision": "NOT_ISSUED",
+        "contractId": "synthetic.panel-toggle",
+        "contractVersion": "1.0.0",
+        "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+        "expected": {
+          "status": "AVAILABLE",
+          "predicate": "DIRECT_TARGET_CHANGED",
+          "value": true,
+          "contractId": "synthetic.panel-toggle",
+          "contractVersion": "1.0.0"
+        },
+        "observed": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "evidenceClass": "OBSERVED_INTERACTION",
+          "observationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42"
+        },
+        "lineage": {
+          "contractSourceRecordIds": [
+            "synthetic-condition-1"
+          ],
+          "approvedContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "relationId": "",
+          "transitionObservationHash": "7ce4e7c86049a6565a527ae08a242c0ded0b01096ccb053dd762d63875218c42",
+          "environmentFingerprint": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "navigationIdentityHash": "946b2ed65c96d69dcff0475a903be951abc7f1e0d66c998c3c0a97bd6efd7ab1",
+          "linkResolutionEvidenceId": ""
+        },
+        "coverage": {
+          "contractSource": "RESOLVED_APPLICABLE",
+          "approval": "APPROVED",
+          "applicability": "APPLICABLE",
+          "binding": "BOUND",
+          "environment": "OBSERVED",
+          "navigation": "OBSERVED",
+          "linkResolution": "UNOBSERVED",
+          "transition": "COMPLETED",
+          "comparison": "NOT_EVALUATED"
+        },
+        "assertionHash": "3927a574cad1d291c7218b1476b890e6383f59097f5bb117ce938946504ba21c"
+      },
+      "elevatedIdentity": {
+        "schema": "fga-verification-identity-v1",
+        "ruleVersion": "verification-identity-v1",
+        "identityStatus": "NOT_EVALUATED",
+        "contractId": "synthetic.panel-toggle",
+        "contractVersion": "1.0.0",
+        "componentHashes": {
+          "contractSourceReceiptHash": "26218095a21c284fecd6447c43ec393d862c217803b5ea6572d0b76da673c808",
+          "contractContentHash": "c7f1dccc24c6250d86ec7ce27877551b3dc8b26c58928d7366d3f7a0ef655df9",
+          "contractApprovalReceiptHash": "6a4800c3869959a04312239da1f4dcefc03dda89321ad407cfceff8a52b5f786",
+          "applicabilityContextHash": "00de0fa98ebc752ffbf9fedafd4457ae9b21069c0b20c00fc6ada495c1ff125e",
+          "semanticConfigurationHash": "1f54e455cab62986f48613f10c593c0e22d0ed7257bbbbc41b1ba61e55e37e97",
+          "verificationRecipeHash": "6a810f0f75ad7640704233db2910b6424c1f072540a04e3d2073f5b056710377",
+          "targetIdentityHash": "82f8d473df84f745a597a61142f8a15082ef6fd4c32c56636ca2f853973a6b34",
+          "environmentIdentityHash": "93b2817535ef7d8484dc822b10b21091760b3065cfdc09c4185e361995670890",
+          "routeStateSetHash": "4c3e470b597592cbb7dc2452e0e06edeea36b548be79ce049e79b3e6dd9026da",
+          "evidencePolicyHash": "e90e692263f0105d843f5831e10780505c09c8dd3afc4c6926f8125de18b557d"
+        },
+        "engineApiVersion": {
+          "major": 1,
+          "minor": 0
+        },
+        "comparatorVersion": "synthetic-assertion-v2",
+        "contractAuthorityHash": "",
+        "expectedSideHash": "",
+        "comparisonScopeHash": "",
+        "verificationIdentityHash": "",
+        "artifactHash": "6536e53f60138fd658d27f81ad7d20239c6c7e0e6b21a56b4f3d2d158abb3c0a",
+        "violations": [
+          "input.canClaimVerifiedFixed:INVALID"
+        ],
+        "claimBoundary": "This artifact binds candidate identity inputs only. It does not verify source authority, approval, target authority, evidence, deployment, customer outcome, or fixed status.",
+        "status": "INFERRED",
+        "requiresHumanConfirm": true,
+        "activationStatus": "NOT_ACTIVATED",
+        "finalVerifierEligible": false,
+        "canClaimVerifiedFixed": false,
+        "canClaimVerifiedOutcome": false,
+        "canClaimVerifiedValue": false
+      }
+    }
+  },
+  "expectedEnums": {
+    "edgeObserved": "OBSERVED",
+    "localPass": "PASS",
+    "identityNotEvaluated": "NOT_EVALUATED"
+  }
+}

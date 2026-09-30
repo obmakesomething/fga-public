@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fga-engine.local/schemas/transition-contract-projection-v2.schema.json",
+  "title": "FGA Transition Contract Projection V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "contractId",
+    "contractVersion",
+    "sourceResolution",
+    "expectedSideProvenance",
+    "approval",
+    "applicability",
+    "binding",
+    "expected",
+    "measurement",
+    "finalVerifierEligible",
+    "canClaimVerifiedFixed"
+  ],
+  "properties": {
+    "schema": {
+      "const": "fga-transition-contract-projection-v2"
+    },
+    "contractId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contractVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "conflictStatus", "records"],
+      "properties": {
+        "status": {
+          "enum": [
+            "RESOLVED_APPLICABLE",
+            "RESOLVED_NOT_APPLICABLE",
+            "MISSING_SOURCE",
+            "UNAPPROVED_SOURCE",
+            "STALE_SOURCE",
+            "AMBIGUOUS_OBLIGATION",
+            "UNKNOWN_APPLICABILITY",
+            "CONFLICTING_SOURCES",
+            "UNOBSERVABLE_CONTRACT",
+            "INSUFFICIENT_COMPARISON_EVIDENCE"
+          ]
+        },
+        "conflictStatus": {
+          "enum": ["NONE", "RESOLVED", "UNRESOLVED"]
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sourceId",
+              "sourceType",
+              "locator",
+              "revision",
+              "authorityStatus",
+              "approvalStatus",
+              "currencyStatus"
+            ],
+            "properties": {
+              "sourceId": { "type": "string", "minLength": 1 },
+              "sourceType": { "type": "string", "minLength": 1 },
+              "locator": { "type": "string", "minLength": 1 },
+              "revision": { "type": "string", "minLength": 1 },
+              "authorityStatus": { "enum": ["CONFIRMED", "UNCONFIRMED", "CONFLICTING"] },
+              "approvalStatus": { "enum": ["APPROVED", "DRAFT", "REVOKED", "EXPIRED"] },
+              "currencyStatus": { "enum": ["CURRENT", "STALE", "SUPERSEDED", "UNKNOWN"] }
+            }
+          }
+        }
+      }
+    },
+    "expectedSideProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "observedEvidenceExcluded"],
+      "properties": {
+        "status": { "enum": ["CONFIRMED", "UNKNOWN", "CONTRADICTED"] },
+        "observedEvidenceExcluded": { "type": "boolean" }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "approvedBy", "approvedAt", "approvedContentHash"],
+      "properties": {
+        "status": { "enum": ["DRAFT", "REVIEWED", "APPROVED", "SUPERSEDED", "REVOKED", "EXPIRED"] },
+        "approvedBy": { "type": "string", "minLength": 1 },
+        "approvedAt": { "type": "string", "minLength": 1 },
+        "approvedContentHash": { "type": "string", "minLength": 1 }
+      }
+    },
+    "applicability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "environmentId", "routeStateId"],
+      "properties": {
+        "status": {
+          "enum": [
+            "APPLICABLE",
+            "NOT_APPLICABLE",
+            "UNKNOWN_APPLICABILITY",
+            "CONFLICTING_APPLICABILITY",
+            "STALE_CONTRACT"
+          ]
+        },
+        "environmentId": { "type": "string", "minLength": 1 },
+        "buildId": { "type": "string" },
+        "actorContextId": { "type": "string" },
+        "routeStateId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "routeStateId", "targetIdentity", "eventType", "relation"],
+      "properties": {
+        "status": { "enum": ["BOUND", "UNBOUND", "PARTIAL", "AMBIGUOUS"] },
+        "routeStateId": { "type": "string", "minLength": 1 },
+        "targetIdentity": { "type": "string", "minLength": 1 },
+        "eventType": { "type": "string", "minLength": 1 },
+        "relation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["relationId", "peerIdentities"],
+          "properties": {
+            "relationId": { "type": "string" },
+            "peerIdentities": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "value"],
+      "properties": {
+        "predicate": { "type": "string", "minLength": 1 },
+        "value": { "type": "boolean" }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requiredEvidenceClass",
+        "requiredNavigationLineage",
+        "requiredLinkResolutionLineage"
+      ],
+      "properties": {
+        "requiredEvidenceClass": { "const": "OBSERVED_INTERACTION" },
+        "requiredNavigationLineage": { "const": "PAGE" },
+        "requiredLinkResolutionLineage": { "enum": ["BROWSER_RESOLVED", "NONE"] }
+      }
+    },
+    "finalVerifierEligible": { "const": false },
+    "canClaimVerifiedFixed": { "const": false }
+  }
+}

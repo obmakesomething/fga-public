@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fga.local/schemas/verification-identity-v1.schema.json",
+  "title": "FGA verification identity v1 candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "ruleVersion",
+    "identityStatus",
+    "contractId",
+    "contractVersion",
+    "componentHashes",
+    "engineApiVersion",
+    "comparatorVersion",
+    "contractAuthorityHash",
+    "expectedSideHash",
+    "comparisonScopeHash",
+    "verificationIdentityHash",
+    "artifactHash",
+    "violations",
+    "claimBoundary",
+    "status",
+    "requiresHumanConfirm",
+    "activationStatus",
+    "finalVerifierEligible",
+    "canClaimVerifiedFixed",
+    "canClaimVerifiedOutcome",
+    "canClaimVerifiedValue"
+  ],
+  "properties": {
+    "schema": { "const": "fga-verification-identity-v1" },
+    "ruleVersion": { "const": "verification-identity-v1" },
+    "identityStatus": { "enum": ["BOUND", "NOT_EVALUATED"] },
+    "contractId": { "type": "string" },
+    "contractVersion": { "type": "string" },
+    "componentHashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractSourceReceiptHash",
+        "contractContentHash",
+        "contractApprovalReceiptHash",
+        "applicabilityContextHash",
+        "semanticConfigurationHash",
+        "verificationRecipeHash",
+        "targetIdentityHash",
+        "environmentIdentityHash",
+        "routeStateSetHash",
+        "evidencePolicyHash"
+      ],
+      "properties": {
+        "contractSourceReceiptHash": { "$ref": "#/definitions/optionalSha256" },
+        "contractContentHash": { "$ref": "#/definitions/optionalSha256" },
+        "contractApprovalReceiptHash": { "$ref": "#/definitions/optionalSha256" },
+        "applicabilityContextHash": { "$ref": "#/definitions/optionalSha256" },
+        "semanticConfigurationHash": { "$ref": "#/definitions/optionalSha256" },
+        "verificationRecipeHash": { "$ref": "#/definitions/optionalSha256" },
+        "targetIdentityHash": { "$ref": "#/definitions/optionalSha256" },
+        "environmentIdentityHash": { "$ref": "#/definitions/optionalSha256" },
+        "routeStateSetHash": { "$ref": "#/definitions/optionalSha256" },
+        "evidencePolicyHash": { "$ref": "#/definitions/optionalSha256" }
+      }
+    },
+    "engineApiVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["major", "minor"],
+      "properties": {
+        "major": { "type": "integer", "minimum": 0 },
+        "minor": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "comparatorVersion": { "type": "string" },
+    "contractAuthorityHash": { "$ref": "#/definitions/optionalSha256" },
+    "expectedSideHash": { "$ref": "#/definitions/optionalSha256" },
+    "comparisonScopeHash": { "$ref": "#/definitions/optionalSha256" },
+    "verificationIdentityHash": { "$ref": "#/definitions/optionalSha256" },
+    "artifactHash": { "$ref": "#/definitions/sha256" },
+    "violations": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "claimBoundary": { "type": "string", "minLength": 1 },
+    "status": { "const": "INFERRED" },
+    "requiresHumanConfirm": { "const": true },
+    "activationStatus": { "const": "NOT_ACTIVATED" },
+    "finalVerifierEligible": { "const": false },
+    "canClaimVerifiedFixed": { "const": false },
+    "canClaimVerifiedOutcome": { "const": false },
+    "canClaimVerifiedValue": { "const": false }
+  },
+  "definitions": {
+    "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+    "optionalSha256": { "type": "string", "pattern": "^$|^[a-fA-F0-9]{64}$" }
+  }
+}

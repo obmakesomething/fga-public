@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fga.local/schemas/delivery-decision-v1.schema.json",
+  "title": "FGA DeliveryDecision v1 candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "ruleVersion",
+    "decision",
+    "gates",
+    "reasonCodes",
+    "summary",
+    "lineage",
+    "decisionHash",
+    "claimBoundary",
+    "status",
+    "requiresHumanConfirm",
+    "activationStatus",
+    "finalVerifierEligible",
+    "canClaimVerifiedFixed",
+    "canClaimVerifiedOutcome",
+    "canClaimVerifiedValue"
+  ],
+  "properties": {
+    "schema": { "const": "fga-delivery-decision-v1" },
+    "ruleVersion": { "const": "delivery-decision-v1" },
+    "decision": { "enum": ["BLOCK", "REVIEW", "NOT_EVALUATED"] },
+    "gates": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": [
+        { "$ref": "#/definitions/certifiedHeadFail" },
+        { "$ref": "#/definitions/certifiedBasePass" },
+        { "$ref": "#/definitions/sameContractContentHash" },
+        { "$ref": "#/definitions/sameComparisonScopeHash" },
+        { "$ref": "#/definitions/noApplicableDispute" },
+        { "$ref": "#/definitions/blockingPolicyAuthorized" }
+      ],
+      "additionalItems": false
+    },
+    "reasonCodes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredGateCount", "satisfiedGateCount", "unsatisfiedGateCount", "unknownGateCount"],
+      "properties": {
+        "requiredGateCount": { "const": 6 },
+        "satisfiedGateCount": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "unsatisfiedGateCount": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "unknownGateCount": { "type": "integer", "minimum": 0, "maximum": 6 }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseAssertionHash",
+        "headAssertionHash",
+        "baseCertificateHash",
+        "headCertificateHash",
+        "contractContentHash",
+        "comparisonScopeHash",
+        "disputeDecisionHash",
+        "blockingPolicyDecisionHash"
+      ],
+      "properties": {
+        "baseAssertionHash": { "$ref": "#/definitions/optionalSha256" },
+        "headAssertionHash": { "$ref": "#/definitions/optionalSha256" },
+        "baseCertificateHash": { "$ref": "#/definitions/optionalSha256" },
+        "headCertificateHash": { "$ref": "#/definitions/optionalSha256" },
+        "contractContentHash": { "$ref": "#/definitions/optionalSha256" },
+        "comparisonScopeHash": { "$ref": "#/definitions/optionalSha256" },
+        "disputeDecisionHash": { "$ref": "#/definitions/optionalSha256" },
+        "blockingPolicyDecisionHash": { "$ref": "#/definitions/optionalSha256" }
+      }
+    },
+    "decisionHash": { "$ref": "#/definitions/sha256" },
+    "claimBoundary": { "type": "string", "minLength": 1 },
+    "status": { "const": "INFERRED" },
+    "requiresHumanConfirm": { "const": true },
+    "activationStatus": { "const": "NOT_ACTIVATED" },
+    "finalVerifierEligible": { "const": false },
+    "canClaimVerifiedFixed": { "const": false },
+    "canClaimVerifiedOutcome": { "const": false },
+    "canClaimVerifiedValue": { "const": false }
+  },
+  "definitions": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "optionalSha256": {
+      "type": "string",
+      "pattern": "^$|^[a-fA-F0-9]{64}$"
+    },
+    "certifiedHeadFail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "status", "reasonCode", "evidence"],
+      "properties": {
+        "gateId": { "const": "CERTIFIED_HEAD_FAIL" },
+        "status": { "enum": ["SATISFIED", "UNSATISFIED", "UNKNOWN"] },
+        "reasonCode": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "object" }
+      }
+    },
+    "certifiedBasePass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "status", "reasonCode", "evidence"],
+      "properties": {
+        "gateId": { "const": "CERTIFIED_BASE_PASS" },
+        "status": { "enum": ["SATISFIED", "UNSATISFIED", "UNKNOWN"] },
+        "reasonCode": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "object" }
+      }
+    },
+    "sameContractContentHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "status", "reasonCode", "evidence"],
+      "properties": {
+        "gateId": { "const": "SAME_CONTRACT_CONTENT_HASH" },
+        "status": { "enum": ["SATISFIED", "UNSATISFIED", "UNKNOWN"] },
+        "reasonCode": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "object" }
+      }
+    },
+    "sameComparisonScopeHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "status", "reasonCode", "evidence"],
+      "properties": {
+        "gateId": { "const": "SAME_COMPARISON_SCOPE_HASH" },
+        "status": { "enum": ["SATISFIED", "UNSATISFIED", "UNKNOWN"] },
+        "reasonCode": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "object" }
+      }
+    },
+    "noApplicableDispute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "status", "reasonCode", "evidence"],
+      "properties": {
+        "gateId": { "const": "NO_APPLICABLE_DISPUTE" },
+        "status": { "enum": ["SATISFIED", "UNSATISFIED", "UNKNOWN"] },
+        "reasonCode": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "object" }
+      }
+    },
+    "blockingPolicyAuthorized": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "status", "reasonCode", "evidence"],
+      "properties": {
+        "gateId": { "const": "BLOCKING_POLICY_AUTHORIZED" },
+        "status": { "enum": ["SATISFIED", "UNSATISFIED", "UNKNOWN"] },
+        "reasonCode": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "object" }
+      }
+    }
+  }
+}

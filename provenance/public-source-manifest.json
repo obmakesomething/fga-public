@@ -1,0 +1,205 @@
+{
+  "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+  "sourceVersion": "0.0.1",
+  "extractionKind": "SELECTED_MODULES_WITH_DOCUMENTED_LOCAL_CORRECTIONS",
+  "sourceRepositoryAccessRequiredForRuntime": false,
+  "sourceCommitPubliclyResolvable": false,
+  "finalVerifierEligible": false,
+  "canClaimVerifiedFixed": false,
+  "files": [
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "public/v1/index.mjs",
+      "sourceGitBlob": "b847fd512e9ba4183f2f59346c74428b79ece5e0",
+      "sourceSha256": "fc54cd78a11432fe7eeb6e18a79366e94529894f1cecf687100036e2cd885bab",
+      "candidatePath": "src/index.mjs",
+      "candidateSha256": "e37ea600061d9ac7e30b5d8f416b317fece25ffab093ed773d46095175b83f5c",
+      "modification": "New smaller entry point; selected original public functions plus explicit internal edge/grounding diagnostics. No original full API compatibility.",
+      "byteIdentical": false,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "public/v1/schemas.mjs",
+      "sourceGitBlob": "31dfe8f5aa8e4c9beb7a1b368f2d400caec6c6c2",
+      "sourceSha256": "2ab615b81a84190e34024f2887c4473a99d516606389c7deafa994bdcc16b11b",
+      "candidatePath": "src/schemas.mjs",
+      "candidateSha256": "06612d262a58c0987b192b0b55d42a367ea30cfa91440fc0e1e796a6e53b3243",
+      "modification": "Narrow registry from 21 to 4 schemas; adjust relative asset path for relocation. Getter/hash behavior retained.",
+      "byteIdentical": false,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "scripts/lib/edge-schema.mjs",
+      "sourceGitBlob": "3691bf1a6fa01207a5932142544b36a85dc46c48",
+      "sourceSha256": "0679a910125d62b2ccda706183c57f289c1f89929f67f0116e39c3a5a38696ea",
+      "candidatePath": "src/lib/edge-schema.mjs",
+      "candidateSha256": "5db1914af540d750d8843ab177bac2366186d4f71cd9fc55f0c4d79c3f1a0741",
+      "modification": "Local correction: preserve restrictive declared provenance through decoration; reject known model-only taxonomy upgrades and unsupported status; require taxonomy ceiling for deterministic classification.",
+      "byteIdentical": false,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "scripts/lib/assertion-v2.mjs",
+      "sourceGitBlob": "b580d52db2ee0d581e0dbba93c5116b601b92f62",
+      "sourceSha256": "068d5bfb2d6c665baf8057e360317a508e0c082266745395bd286517ee489ab8",
+      "candidatePath": "src/lib/assertion-v2.mjs",
+      "candidateSha256": "ecda082ed2a077f9dd2d25b8af7d681320fd846dce088509b837b4523c05d91a",
+      "modification": "Local correction: require boolean or peer-array predicate observations; missing or invalid data returns NOT_EVALUATED with PREDICATE_OBSERVATION_MISSING_OR_INVALID.",
+      "byteIdentical": false,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "scripts/lib/verification-identity.mjs",
+      "sourceGitBlob": "4e1ef4c2555451153c6a54f87f16355624f7df93",
+      "sourceSha256": "ef77f264104b734478694f793e00f73d8c15138fe97c7a27e32474dbc83d0d16",
+      "candidatePath": "src/lib/verification-identity.mjs",
+      "candidateSha256": "ef77f264104b734478694f793e00f73d8c15138fe97c7a27e32474dbc83d0d16",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "scripts/lib/delivery-decision.mjs",
+      "sourceGitBlob": "bbd3e116fd6683bdb45974e2f008122a9ba1d4ce",
+      "sourceSha256": "2eddf743880875ea0e3af2df9c59f8a0f0348e03eb90dda606627a2728248282",
+      "candidatePath": "src/lib/delivery-decision.mjs",
+      "candidateSha256": "2eddf743880875ea0e3af2df9c59f8a0f0348e03eb90dda606627a2728248282",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "scripts/lib/finding-grounding.mjs",
+      "sourceGitBlob": "8e527ad82ccedbf06f3f45a030eb5ebd0772d3b7",
+      "sourceSha256": "1fe5aac037bad10a0ea4c26741399ef834ad96f771297f102fa25688ad5bca7e",
+      "candidatePath": "src/lib/finding-grounding.mjs",
+      "candidateSha256": "1fe5aac037bad10a0ea4c26741399ef834ad96f771297f102fa25688ad5bca7e",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "scripts/lib/governed-receipt-core.mjs",
+      "sourceGitBlob": "2e489263ce6c058870591ce1f3da49308b53108f",
+      "sourceSha256": "13961f4f55468e38b6e0a284d77470cd3a7f07b3bfba1926916e2ee3e31aaa1b",
+      "candidatePath": "src/lib/governed-receipt-core.mjs",
+      "candidateSha256": "13961f4f55468e38b6e0a284d77470cd3a7f07b3bfba1926916e2ee3e31aaa1b",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "schemas/transition-contract-projection-v2.schema.json",
+      "sourceGitBlob": "4e4c7224e5171bf2246102f6d5d55dd4008d77cc",
+      "sourceSha256": "098bf5c33cac5480b6589b4b2314413468b5caca7e2da17ec3965297fe4294fd",
+      "candidatePath": "schemas/transition-contract-projection-v2.schema.json",
+      "candidateSha256": "098bf5c33cac5480b6589b4b2314413468b5caca7e2da17ec3965297fe4294fd",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "schemas/verification-identity-input-v1.schema.json",
+      "sourceGitBlob": "29be4bd2908354ac582e9d016ba7b91b7686cca9",
+      "sourceSha256": "994fc7103e5b6bcb440c3cfc2d18721003d0f0b7aa2c077bb0e75274866c3d49",
+      "candidatePath": "schemas/verification-identity-input-v1.schema.json",
+      "candidateSha256": "994fc7103e5b6bcb440c3cfc2d18721003d0f0b7aa2c077bb0e75274866c3d49",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "schemas/verification-identity-v1.schema.json",
+      "sourceGitBlob": "64af25e06167532c0d013233b43629cab77066fc",
+      "sourceSha256": "edfd8c7716a106398867785e86812357c86726d08e33716df9a21b6865f2560c",
+      "candidatePath": "schemas/verification-identity-v1.schema.json",
+      "candidateSha256": "edfd8c7716a106398867785e86812357c86726d08e33716df9a21b6865f2560c",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    },
+    {
+      "sourceCommit": "495aead654a75d7a7eddd3b3ea5387884471561b",
+      "sourcePath": "schemas/delivery-decision-v1.schema.json",
+      "sourceGitBlob": "2e9f913f310923550adf0b1059454479b09209b4",
+      "sourceSha256": "fea1c7f45a971f65c6d6b546cf93d52f839afc87653b799f000039297a01bb1f",
+      "candidatePath": "schemas/delivery-decision-v1.schema.json",
+      "candidateSha256": "fea1c7f45a971f65c6d6b546cf93d52f839afc87653b799f000039297a01bb1f",
+      "modification": "NONE; source bytes preserved",
+      "byteIdentical": true,
+      "tests": [
+        "test/research.test.mjs",
+        "test/extraction-regressions.test.mjs"
+      ]
+    }
+  ],
+  "newlyAuthoredFiles": [
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "publication-review.json",
+    "examples/fixtures.mjs",
+    "examples/run.mjs",
+    "examples/expected-output.json",
+    "examples/summary.json",
+    "test/research.test.mjs",
+    "test/extraction-regressions.test.mjs",
+    "test/checkers.test.mjs",
+    "scripts/check-public-files.mjs",
+    "scripts/check-public-imports.mjs",
+    "scripts/check-public-claims.mjs",
+    "scripts/check-public-examples.mjs",
+    "scripts/check-public-package.mjs",
+    "docs/architecture.md",
+    "docs/claims-and-limits.md",
+    "docs/reproduction.md",
+    "docs/authorship.md",
+    "docs/negative-results.md",
+    "provenance/public-source-manifest.json",
+    "provenance/public-files.json",
+    "provenance/payload-sha256.json"
+  ]
+}

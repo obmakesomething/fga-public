@@ -1,0 +1,47 @@
+{
+  "E1": {
+    "observedEligible": true,
+    "modelEligible": false,
+    "unimplementedEligible": false,
+    "spoofedTriggerEligible": false
+  },
+  "E2": {
+    "missingTransition": "NOT_EVALUATED",
+    "passingTransition": "PASS",
+    "failingTransition": "FAIL",
+    "proposedTransition": "NOT_EVALUATED",
+    "missingDelta": "NOT_EVALUATED"
+  },
+  "E3": {
+    "targetMismatch": "TRANSITION_BINDING_MISMATCH",
+    "environmentMismatch": "ENVIRONMENT_IDENTITY_MISMATCH",
+    "missingReceipt": "NOT_EVALUATED"
+  },
+  "E4": {
+    "candidateGroundingClass": "APPROVED_CONTRACT",
+    "hardEligible": false,
+    "missingReceiptHardEligible": false
+  },
+  "E5": {
+    "completeDelivery": {
+      "decision": "BLOCK",
+      "activationStatus": "NOT_ACTIVATED",
+      "canClaimVerifiedFixed": false
+    },
+    "unknownIssuer": {
+      "decision": "NOT_EVALUATED",
+      "activationStatus": "NOT_ACTIVATED",
+      "canClaimVerifiedFixed": false
+    },
+    "scopeDrift": {
+      "decision": "REVIEW",
+      "activationStatus": "NOT_ACTIVATED",
+      "canClaimVerifiedFixed": false
+    },
+    "elevatedPolicy": {
+      "decision": "NOT_EVALUATED",
+      "activationStatus": "NOT_ACTIVATED",
+      "canClaimVerifiedFixed": false
+    }
+  }
+}
